@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 install *)",
+      "Bash(echo 'export PATH=\"$HOME/Library/Python/3.9/bin:$PATH\"')",
+      "Bash(echo 'alias pip=pip3')",
+      "Bash(mkdir -p ~/bin)",
+      "Bash(cp /tmp/gh_extracted/gh_2.92.0_macOS_arm64/bin/gh ~/bin/gh)",
+      "Bash(chmod +x ~/bin/gh)",
+      "Bash(~/bin/gh --version)",
+      "Read(//Users/vijaya.appasani/**)",
+      "Bash(echo 'export PATH=\"$HOME/bin:$PATH\"')"
+    ]
+  }
+}
