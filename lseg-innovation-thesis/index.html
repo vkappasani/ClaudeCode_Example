@@ -369,7 +369,8 @@ details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:14.5px}
 @media (max-width:820px){.refcols{grid-template-columns:1fr}}
 .reflist{display:grid;gap:0;font-size:13.5px}
 .ref{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;padding:8px;border-bottom:1px solid var(--line)}
-.ref:target{background:var(--surface-3)}
+.ref.hit{background:var(--surface-3)}
+[data-jump]{cursor:pointer}
 .ref .id{font:600 12px/1.5 var(--f);color:var(--accent-text)}
 .ref a{word-break:break-word;font-size:12.5px}
 .ref .ty{font:600 10px/1 var(--f);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-left:6px}
@@ -406,11 +407,11 @@ details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:14.5px}
   <div class="wrap">
     <div class="brandmark">LSEG Innovation Thesis<small>Tech Mahindra point of view</small></div>
     <nav class="navlinks" aria-label="Sections">
-      <a href="#strategy"><b>1</b>Strategy vs rivals</a>
-      <a href="#products"><b>2</b>Products &amp; plays</a>
-      <a href="#platform"><b>3</b>Tech &amp; platform</a>
-      <a href="#roadmap"><b>4</b>Roadmap</a>
-      <a href="#sources"><b>5</b>Sources</a>
+      <a data-jump="strategy" role="link" tabindex="0"><b>1</b>Strategy vs rivals</a>
+      <a data-jump="products" role="link" tabindex="0"><b>2</b>Products &amp; plays</a>
+      <a data-jump="platform" role="link" tabindex="0"><b>3</b>Tech &amp; platform</a>
+      <a data-jump="roadmap" role="link" tabindex="0"><b>4</b>Roadmap</a>
+      <a data-jump="sources" role="link" tabindex="0"><b>5</b>Sources</a>
     </nav>
     <span class="techm-logo" data-variant="color"><img src="assets/techm-logo.svg" alt="Tech Mahindra"><span class="fb" hidden>Tech Mahindra</span></span>
   </div>
@@ -452,7 +453,7 @@ details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:14.5px}
     </div>
     <div>
       <div class="ticker" id="ticker"></div>
-      <div class="ticker-cap"><span>H1 2026 financial baseline shows the strategy is commercialising <a class="cite" href="#S-2">S-2</a></span><span>FY2026 guidance raised to 7.0–7.5% organic CC growth <a class="cite" href="#S-2">S-2</a><a class="cite" href="#S-3">S-3</a></span></div>
+      <div class="ticker-cap"><span>H1 2026 financial baseline shows the strategy is commercialising <a class="cite" data-jump="S-2" role="link" tabindex="0">S-2</a></span><span>FY2026 guidance raised to 7.0–7.5% organic CC growth <a class="cite" data-jump="S-2" role="link" tabindex="0">S-2</a><a class="cite" data-jump="S-3" role="link" tabindex="0">S-3</a></span></div>
     </div>
   </div>
 
@@ -495,13 +496,13 @@ details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:14.5px}
             <div><b>Discovery</b>Prototype AI features with tier-1 design partners before committing engineering capacity.</div>
             <div><b>Delivery</b>Security-, entitlement- and audit-hardened releases into Workspace, Teams and Excel.</div>
           </div>
-          <p class="small">Lets Workspace AI iterate on a near-weekly cadence while market-data engines stay change-controlled. It targets Bloomberg's more centrally gated Terminal releases.<a class="cite" href="#S-17">S-17</a><a class="cite" href="#S-18">S-18</a></p>
+          <p class="small">Lets Workspace AI iterate on a near-weekly cadence while market-data engines stay change-controlled. It targets Bloomberg's more centrally gated Terminal releases.<a class="cite" data-jump="S-17" role="link" tabindex="0">S-17</a><a class="cite" data-jump="S-18" role="link" tabindex="0">S-18</a></p>
         </div>
         <div class="card">
           <div class="k">LENS 3 · ECOSYSTEM</div>
           <h4>Platform-Centric Open Innovation</h4>
           <p class="small">LSEG exposes 33+ PB of AI-ready content through feeds, APIs, clouds and MCP instead of one closed application. Named channels: Microsoft Copilot Studio, Anthropic, OpenAI, Databricks, Snowflake, AWS and Google Cloud.</p>
-          <p class="small">Adoption so far: ~90 MCP-connected customers and 150+ onboarding (Q1 2026), &gt;200 enterprise engagements and ~17,000 AI Search users (H1 2026).<a class="cite" href="#S-2">S-2</a><a class="cite" href="#S-4">S-4</a></p>
+          <p class="small">Adoption so far: ~90 MCP-connected customers and 150+ onboarding (Q1 2026), &gt;200 enterprise engagements and ~17,000 AI Search users (H1 2026).<a class="cite" data-jump="S-2" role="link" tabindex="0">S-2</a><a class="cite" data-jump="S-4" role="link" tabindex="0">S-4</a></p>
         </div>
       </div>
     </div>
@@ -620,7 +621,7 @@ details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:14.5px}
         <div class="card"><div class="eyebrow">Delivery</div><h4>Dual-Track per product</h4>
           <p>Each product runs a standing Discovery track (3–5 design-partner clients, feasibility spikes on the common data/AI platform, compliance pre-clearance). It feeds a Delivery track that ships production increments. AI feature velocity then never forces re-certification of the core market-data engine.</p></div>
         <div class="card"><div class="eyebrow">Group engineering pillars</div><h4>Talent · common platforms · product discipline</h4>
-          <p>LSEG's three official pillars are designed to raise speed and quality while controlling cost and risk, and to make AI adoption faster and cheaper.<a class="cite" href="#S-1">S-1</a><a class="cite" href="#S-3">S-3</a> Common platforms carry scale. Businesses keep domain product ownership.</p></div>
+          <p>LSEG's three official pillars are designed to raise speed and quality while controlling cost and risk, and to make AI adoption faster and cheaper.<a class="cite" data-jump="S-1" role="link" tabindex="0">S-1</a><a class="cite" data-jump="S-3" role="link" tabindex="0">S-3</a> Common platforms carry scale. Businesses keep domain product ownership.</p></div>
       </div>
     </div>
 
@@ -628,7 +629,7 @@ details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:14.5px}
       <div class="block-head"><div style="display:grid;gap:4px"><h3>Security, privacy, risk &amp; compliance guardrails</h3><p class="small muted">Engineered into the architecture as first-class requirements rather than added as a compliance overlay (strategy §8, product §7)</p></div></div>
       <div class="callout">
         <div class="eyebrow">The most material CTO-level risk is regulatory and architectural</div>
-        <p>LSEG's transformation concentrates mission-critical dependency on Microsoft Azure. The EU has designated Microsoft a DORA Critical Third-Party Provider, subject to direct oversight, exit-strategy testing and 4-hour major-incident reporting. Legal accountability for resilience stays with LSEG.<a class="cite" href="#S-42">S-42</a><a class="cite" href="#S-43">S-43</a></p>
+        <p>LSEG's transformation concentrates mission-critical dependency on Microsoft Azure. The EU has designated Microsoft a DORA Critical Third-Party Provider, subject to direct oversight, exit-strategy testing and 4-hour major-incident reporting. Legal accountability for resilience stays with LSEG.<a class="cite" data-jump="S-42" role="link" tabindex="0">S-42</a><a class="cite" data-jump="S-43" role="link" tabindex="0">S-43</a></p>
       </div>
       <div class="guard" id="guard"></div>
     </div>
@@ -718,7 +719,7 @@ details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:14.5px}
 /* ---------- citation helper: "text [S:2,52] more [P:4]" ---------- */
 function C(s){
   return String(s).replace(/\[(S|P):([\d,\s]+)\]/g,function(_,d,n){
-    return n.split(',').map(function(x){x=x.trim();return '<a class="cite" href="#'+d+'-'+x+'" data-ref="'+d+'-'+x+'">'+d+'-'+x+'</a>';}).join('');
+    return n.split(',').map(function(x){x=x.trim();return '<a class="cite" data-jump="'+d+'-'+x+'" role="link" tabindex="0">'+d+'-'+x+'</a>';}).join('');
   });
 }
 function $(id){return document.getElementById(id);}
@@ -1259,13 +1260,19 @@ function drawRefs(){
 $('ref-q').oninput=function(){refQ=this.value.trim().toLowerCase();drawRefs();};
 Array.prototype.forEach.call($('ref-type').querySelectorAll('button'),function(b){b.onclick=function(){refT=b.dataset.t;Array.prototype.forEach.call($('ref-type').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b);});drawRefs();};});
 var REFMAP={};RS.forEach(function(r,i){REFMAP['S-'+(i+1)]=r.split('|')[0];});RP.forEach(function(r,i){REFMAP['P-'+(i+1)]=r.split('|')[0];});
-document.addEventListener('mouseover',function(e){var a=e.target.closest&&e.target.closest('a.cite');if(a){var k=a.getAttribute('href').slice(1);if(REFMAP[k])showTip(e,'<b>'+k+'</b> '+esc(REFMAP[k]));}});
+document.addEventListener('mouseover',function(e){var a=e.target.closest&&e.target.closest('a.cite');if(a){var k=a.dataset.jump;if(REFMAP[k])showTip(e,'<b>'+k+'</b> '+esc(REFMAP[k]));}});
 document.addEventListener('mouseout',function(e){if(e.target.closest&&e.target.closest('a.cite'))hideTip();});
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.cite');if(a){var k=a.getAttribute('href').slice(1);var el=$(k);if(el&&el.hidden){refQ="";refT="all";$('ref-q').value="";Array.prototype.forEach.call($('ref-type').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x.dataset.t==='all');});drawRefs();}}});
+function jump(k){
+  if(/^[SP]-\d+$/.test(k)){var r=$(k);if(r&&r.hidden){refQ="";refT="all";$('ref-q').value="";Array.prototype.forEach.call($('ref-type').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x.dataset.t==='all');});drawRefs();}
+    Array.prototype.forEach.call(document.querySelectorAll('.ref.hit'),function(x){x.classList.remove('hit');});}
+  var el=$(k);if(!el)return;el.scrollIntoView({block:'start'});if(el.classList.contains('ref'))el.classList.add('hit');
+}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('[data-jump]');if(a){e.preventDefault();jump(a.dataset.jump);}});
+document.addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;var a=e.target.closest&&e.target.closest('[data-jump]');if(a){e.preventDefault();jump(a.dataset.jump);}});
 
 /* ---------- nav highlight ---------- */
 var secs=["strategy","products","platform","roadmap","sources"];
-function onScroll(){var y=scrollY+120,cur=null;secs.forEach(function(s){var el=$(s);if(el&&el.offsetTop<=y)cur=s;});Array.prototype.forEach.call(document.querySelectorAll('.navlinks a'),function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur);});}
+function onScroll(){var y=scrollY+120,cur=null;secs.forEach(function(s){var el=$(s);if(el&&el.offsetTop<=y)cur=s;});Array.prototype.forEach.call(document.querySelectorAll('.navlinks a'),function(a){a.classList.toggle('on',a.dataset.jump===cur);});}
 addEventListener('scroll',onScroll,{passive:true});
 
 Array.prototype.forEach.call(document.querySelectorAll('.techm-logo img'),function(img){function fb(){img.hidden=true;img.nextElementSibling.hidden=false;}if(img.complete&&!img.naturalWidth)fb();img.addEventListener('error',fb);});
