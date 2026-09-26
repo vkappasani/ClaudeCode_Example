@@ -1,0 +1,1156 @@
+<title>LSEG Innovation Thesis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --surface-2:#E9EDF2; --surface-3:#DDE3EA;
+  --ink:#0F1A26; --ink-2:#3F4D5C; --muted:#667483; --line:#D3DAE2; --line-2:#BCC6D1;
+  --accent:#1747C4; --accent-soft:#E3EAFB; --accent-ink:#FFFFFF;
+  --h1:#2a78d6; --h2:#eb6834; --h3:#1baf7a;
+  --h1-soft:#DCE9FA; --h2-soft:#FCE4DA; --h3-soft:#D5F1E6;
+  --lseg:#2a78d6; --rival:#eb6834;
+  --s1:#cde2fb; --s2:#9ec5f4; --s3:#6da7ec; --s4:#2a78d6; --s5:#184f95;
+  --s-ink-lo:#0F1A26; --s-ink-hi:#FFFFFF;
+  --warn:#B25E00; --warn-soft:#FFF1DE; --crit:#B3261E; --crit-soft:#FBE3E1;
+  --shadow:0 1px 2px rgba(15,26,38,.06),0 4px 14px rgba(15,26,38,.06);
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0C131B; --surface:#131C26; --surface-2:#1A2531; --surface-3:#22303E;
+    --ink:#E7ECF2; --ink-2:#B1BDC9; --muted:#8694A3; --line:#273443; --line-2:#344556;
+    --accent:#7FA2FF; --accent-soft:#1B2A4D; --accent-ink:#0C131B;
+    --h1:#3987e5; --h2:#d95926; --h3:#199e70;
+    --h1-soft:#17304F; --h2-soft:#3D2217; --h3-soft:#123A2D;
+    --lseg:#3987e5; --rival:#d95926;
+    --s1:#16304F; --s2:#184f95; --s3:#256abf; --s4:#3987e5; --s5:#86b6ef;
+    --s-ink-lo:#E7ECF2; --s-ink-hi:#E7ECF2;
+    --warn:#F0A548; --warn-soft:#3A2A12; --crit:#F08A83; --crit-soft:#3E1C1A;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0C131B; --surface:#131C26; --surface-2:#1A2531; --surface-3:#22303E;
+  --ink:#E7ECF2; --ink-2:#B1BDC9; --muted:#8694A3; --line:#273443; --line-2:#344556;
+  --accent:#7FA2FF; --accent-soft:#1B2A4D; --accent-ink:#0C131B;
+  --h1:#3987e5; --h2:#d95926; --h3:#199e70;
+  --h1-soft:#17304F; --h2-soft:#3D2217; --h3-soft:#123A2D;
+  --lseg:#3987e5; --rival:#d95926;
+  --s1:#16304F; --s2:#184f95; --s3:#256abf; --s4:#3987e5; --s5:#86b6ef;
+  --s-ink-lo:#E7ECF2; --s-ink-hi:#E7ECF2;
+  --warn:#F0A548; --warn-soft:#3A2A12; --crit:#F08A83; --crit-soft:#3E1C1A;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--f-body);padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(28px,4vw,40px);font-variation-settings:"wdth" 78;font-weight:750;line-height:1.05}
+h3{font-size:20px;font-variation-settings:"wdth" 88;font-weight:700;line-height:1.2}
+h4{font-size:15px;font-variation-settings:"wdth" 95;font-weight:700}
+p{margin:0}
+.eyebrow{font:600 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--ink-2);max-width:68ch;font-size:16px}
+.mono{font-family:var(--f-mono)}
+.num{font-variant-numeric:tabular-nums}
+
+/* nav */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px}
+.topbar .wrap{display:flex;align-items:center;gap:16px;min-height:56px;flex-wrap:wrap}
+.brandmark{font:800 15px/1 var(--f-display);font-variation-settings:"wdth" 70;letter-spacing:.02em;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.brandmark i{display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:2px}
+.navlinks{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
+.navlinks a{font:500 13px/1 var(--f-body);color:var(--ink-2);text-decoration:none;padding:9px 11px;border-radius:6px;white-space:nowrap}
+.navlinks a b{font-family:var(--f-mono);font-weight:600;color:var(--muted);margin-right:6px}
+.navlinks a:hover,.navlinks a.on{background:var(--surface-2);color:var(--ink)}
+
+/* hero */
+.hero{padding-block:48px 28px;display:grid;gap:28px}
+.hero h1{font-size:clamp(40px,7.4vw,84px);font-variation-settings:"wdth" 66;font-weight:800;line-height:.95;letter-spacing:-.02em}
+.hero h1 span{color:var(--accent)}
+.thesis{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:860px){.thesis{grid-template-columns:1fr}}
+.thesis blockquote{margin:0;font-size:18px;line-height:1.55;color:var(--ink);max-width:62ch;border-left:3px solid var(--accent);padding-left:18px}
+.provenance{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center;font-size:12.5px;color:var(--ink-2)}
+.provenance .tag{justify-self:start}
+.tag{display:inline-flex;align-items:center;gap:6px;font:600 10.5px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:4px;white-space:nowrap}
+.tag.disc{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line-2)}
+.tag.ana{background:transparent;color:var(--ink-2);border:1px dashed var(--line-2)}
+.findings{display:grid;gap:10px;font-size:14px;color:var(--ink-2)}
+.findings li{margin-left:-4px}
+.findings ul{margin:0;padding-left:18px;display:grid;gap:8px}
+
+.ticker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.tick{padding:14px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:4px;align-content:start}
+@media (max-width:640px){.ticker{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tick .v{font:600 26px/1 var(--f-mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tick .l{font-size:12px;color:var(--ink-2);line-height:1.35}
+.tick .d{font:500 11px/1.3 var(--f-mono);color:var(--muted)}
+.ticker-cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+
+/* sections */
+section.part{padding-block:56px 8px;display:grid;gap:28px}
+.part-head{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;align-items:end;border-top:2px solid var(--ink);padding-top:18px}
+.part-no{font:800 64px/.8 var(--f-display);font-variation-settings:"wdth" 62;color:var(--accent);grid-row:span 2}
+.part-head .lede{grid-column:2}
+@media (max-width:560px){.part-no{font-size:44px}}
+.block{display:grid;gap:14px}
+.block-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+
+/* cite */
+a.cite{font:500 10.5px/1 var(--f-mono);text-decoration:none;color:var(--accent);background:var(--accent-soft);padding:2px 4px;border-radius:3px;margin-left:2px;vertical-align:1px;white-space:nowrap}
+a.cite:hover{text-decoration:underline}
+
+/* frameworks */
+.fw{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.fw{grid-template-columns:1fr}}
+.fw .card{display:grid;gap:8px;align-content:start}
+.fw .k{font:600 11px/1 var(--f-mono);color:var(--muted)}
+.hbar{display:flex;gap:2px;height:30px;border-radius:5px;overflow:hidden;margin-top:4px}
+.hbar div{display:flex;align-items:center;padding-left:8px;font:600 11.5px/1 var(--f-mono);color:#fff;white-space:nowrap}
+.hlegend{display:grid;gap:4px;font-size:12.5px;color:var(--ink-2)}
+.hlegend b{font-family:var(--f-mono);font-weight:600;color:var(--ink)}
+
+/* rivals */
+.rivals{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.rv{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:10px;align-content:start;transition:border-color .15s,transform .15s}
+.rv:hover{border-color:var(--line-2);transform:translateY(-1px)}
+.rv:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rv[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.rv .pos{font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.logo{display:inline-flex;align-items:center;gap:8px;height:30px}
+.logo .mk{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:6px;font:800 12px/1 var(--f-display);font-variation-settings:"wdth" 75;color:#fff;letter-spacing:.02em;flex:none}
+.logo .wm{font:750 16px/1 var(--f-display);font-variation-settings:"wdth" 80;letter-spacing:-.005em;color:var(--ink)}
+.rv-detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:820px){.rv-detail{grid-template-columns:1fr}}
+.rv-detail dl{margin:0;display:grid;gap:10px}
+.rv-detail dt{font:600 11px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.rv-detail dd{margin:0;font-size:14px}
+.moves{display:grid;gap:10px}
+.move{border-left:3px solid var(--rival);padding:2px 0 2px 12px;font-size:14px}
+.move .seg{font:600 11px/1.4 var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.move.l{border-left-color:var(--lseg)}
+
+/* scorecard */
+.sc-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px}
+@media (max-width:900px){.sc-grid{grid-template-columns:1fr}}
+.scroll-x{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+.heat{font-size:12.5px;min-width:560px}
+.heat th{font:600 11px/1.2 var(--f-mono);color:var(--ink-2);padding:6px 4px;text-align:center;vertical-align:bottom}
+.heat th.dim{text-align:left;font-family:var(--f-body);font-weight:500;font-size:12.5px;color:var(--ink);padding-right:10px}
+.heat td{padding:2px}
+.heat td .c{height:32px;border-radius:4px;display:grid;place-items:center;font:600 13px/1 var(--f-mono);cursor:default}
+.heat th.col-sel{color:var(--accent)}
+.heat tr:hover th.dim{color:var(--accent)}
+.seg-ctrl{display:inline-flex;background:var(--surface-2);border-radius:8px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg-ctrl button{all:unset;cursor:pointer;font:500 12.5px/1 var(--f-body);padding:8px 11px;border-radius:6px;color:var(--ink-2);white-space:nowrap}
+.seg-ctrl button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.seg-ctrl button:focus-visible{outline:2px solid var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2);align-items:center}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.seq-legend{display:flex;align-items:center;gap:2px;font:500 11px/1 var(--f-mono);color:var(--muted)}
+.seq-legend span.sw{width:22px;height:12px;border-radius:2px}
+svg text{font-family:var(--f-body)}
+.tip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:6px;max-width:280px;box-shadow:var(--shadow);opacity:0;transition:opacity .1s}
+.tip.on{opacity:1}
+.tip b{font-family:var(--f-mono)}
+
+/* battlegrounds */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{all:unset;cursor:pointer;font:600 13px/1.2 var(--f-body);padding:10px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.gap-table{font-size:13.5px;min-width:640px}
+.gap-table th{text-align:left;font:600 11px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--line-2)}
+.gap-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+.gap-table td:first-child{width:18%}
+.gap-table td.rv-c{border-left:3px solid var(--rival)}
+.gap-table td.ls-c{border-left:3px solid var(--lseg)}
+.play{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:820px){.play{grid-template-columns:1fr}}
+.play-box{background:var(--accent-soft);border-radius:10px;padding:18px;display:grid;gap:10px;align-content:start}
+.play-box h4{font-size:18px;font-variation-settings:"wdth" 82}
+ul.clean{margin:0;padding-left:18px;display:grid;gap:7px;font-size:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{all:unset;cursor:pointer;font:500 12.5px/1 var(--f-body);padding:7px 10px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent)}
+.chip .arrow{font-family:var(--f-mono);color:var(--accent)}
+
+/* products */
+.hz-ctrl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.hz{display:inline-flex;align-items:center;justify-content:center;font:700 10.5px/1 var(--f-mono);letter-spacing:.04em;padding:4px 6px;border-radius:4px;color:var(--ink);white-space:nowrap}
+.hz.H1{background:var(--h1-soft);box-shadow:inset 3px 0 0 var(--h1)}
+.hz.H2{background:var(--h2-soft);box-shadow:inset 3px 0 0 var(--h2)}
+.hz.H3{background:var(--h3-soft);box-shadow:inset 3px 0 0 var(--h3)}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:900px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.pgrid{grid-template-columns:1fr}}
+.pc{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;transition:border-color .15s}
+.pc:hover{border-color:var(--line-2)}
+.pc:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pc[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.pc .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pc .rank{font:600 11px/1 var(--f-mono);color:var(--muted)}
+.pc .rank b{color:var(--ink);font-size:18px;font-family:var(--f-display);font-variation-settings:"wdth" 70;margin-right:2px}
+.pc h4{font-size:16px}
+.pc .inno{font-size:13px;color:var(--ink-2);line-height:1.45}
+.pc .vs{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px}
+.pdetail{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:22px;box-shadow:var(--shadow)}
+.pd-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:start}
+.pd-head .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:var(--ink-2)}
+.hz-lane{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.hz-lane{grid-template-columns:1fr}}
+.hz-card{border-radius:8px;padding:14px;display:grid;gap:8px;align-content:start;font-size:13.5px;background:var(--surface-2)}
+.hz-card .when{font:500 11px/1 var(--f-mono);color:var(--muted)}
+.example{border:1px dashed var(--line-2);border-radius:10px;padding:16px;font-size:14px;display:grid;gap:8px}
+.ctolens{background:var(--warn-soft);border-radius:10px;padding:16px;font-size:13.5px;display:grid;gap:6px}
+.ctolens .eyebrow{color:var(--warn)}
+.h2h{font-size:13px;min-width:720px}
+.h2h th{text-align:left;font:600 11px/1.3 var(--f-mono);letter-spacing:.04em;color:var(--ink-2);padding:9px 10px;background:var(--surface-2);position:sticky;top:0}
+.h2h td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+.h2h td:first-child{font-weight:600;background:var(--accent-soft);width:22%}
+.h2h td.na{color:var(--muted);font-style:italic}
+
+/* platform matrix */
+.mx{font-size:12.5px;min-width:820px}
+.mx th,.mx td{border-bottom:1px solid var(--line)}
+.mx thead th{font:600 11px/1.2 var(--f-mono);color:var(--ink-2);padding:8px 4px;vertical-align:bottom;text-align:center;cursor:pointer;min-width:70px}
+.mx thead th.sel{color:var(--accent)}
+.mx thead th:hover{color:var(--accent)}
+.mx th.layer{text-align:left;font:700 10.5px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--accent);padding:14px 6px 6px;background:transparent;border-bottom:1px solid var(--line-2)}
+.mx td.cap{padding:8px 10px 8px 6px;cursor:pointer}
+.mx td.cap:hover{color:var(--accent)}
+.mx td.dot{text-align:center;padding:6px 2px}
+.mx .d2,.mx .d1{display:inline-block;width:14px;height:14px;border-radius:50%}
+.mx .d2{background:var(--accent)}
+.mx .d1{border:2px solid var(--accent);opacity:.7}
+.mx tr.dim td,.mx td.dimc{opacity:.22}
+.mx tr.sel td.cap{font-weight:600;color:var(--accent)}
+.bp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:820px){.bp{grid-template-columns:1fr}}
+.bp ol{margin:0;padding-left:20px;display:grid;gap:8px;font-size:14px}
+.capcloud{display:flex;flex-wrap:wrap;gap:6px}
+.capcloud span{font-size:12px;padding:5px 8px;border-radius:5px;background:var(--surface-2);color:var(--ink-2)}
+.capcloud span.p{background:var(--accent-soft);color:var(--ink)}
+.patterns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.patterns{grid-template-columns:1fr}}
+.patterns .card{display:grid;gap:8px;align-content:start;font-size:13.5px}
+.segbp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.segbp{grid-template-columns:1fr}}
+details.acc{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+details.acc summary{cursor:pointer;padding:14px 16px;font:700 15px/1.3 var(--f-display);font-variation-settings:"wdth" 90;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";font-family:var(--f-mono);color:var(--accent)}
+details.acc[open] summary::after{content:"−"}
+details.acc .in{padding:0 16px 16px;display:grid;gap:12px;font-size:13.5px}
+.opmodel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.opmodel{grid-template-columns:1fr}}
+.opmodel .card{display:grid;gap:8px;align-content:start;font-size:13.5px}
+.track{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}
+.track div{border-radius:6px;padding:10px;font-size:12.5px;background:var(--surface-2)}
+.track div b{display:block;font:600 11px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:4px}
+
+/* guardrails */
+.guard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.guard{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.guard{grid-template-columns:1fr}}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start;font-size:13.5px;position:relative;overflow:hidden}
+.gcard::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--crit)}
+.gcard.w::before{background:var(--warn)}
+.sev{font:700 10.5px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;display:inline-flex;gap:6px;align-items:center}
+.sev.c{color:var(--crit)} .sev.w{color:var(--warn)}
+.gcard .affects{display:flex;flex-wrap:wrap;gap:4px}
+.gcard .affects span{font:500 11px/1 var(--f-mono);padding:4px 6px;border-radius:4px;background:var(--surface-2);color:var(--ink-2)}
+.callout{background:var(--ink);color:var(--bg);border-radius:12px;padding:20px 22px;display:grid;gap:8px}
+.callout .eyebrow{color:color-mix(in srgb,var(--bg) 70%,var(--ink))}
+.callout p{max-width:80ch}
+
+/* KPI */
+.kpi{font-size:13px;min-width:720px}
+.kpi th{text-align:left;font:600 11px/1.3 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line-2)}
+.kpi td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+.kpi td:first-child{font-weight:600;width:20%}
+.kpi td:nth-child(2){font-family:var(--f-mono);font-size:12.5px;width:36%}
+
+/* roadmap */
+.phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;border-radius:10px;overflow:hidden}
+@media (max-width:900px){.phases{grid-template-columns:1fr}}
+.phase{background:var(--surface);padding:14px;display:grid;gap:6px;align-content:start;font-size:12.5px;color:var(--ink-2)}
+.phase .yr{font:700 18px/1 var(--f-display);font-variation-settings:"wdth" 72;color:var(--ink)}
+.phase .st{font:600 10.5px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.08em}
+.phase.done .st{color:var(--h3)} .phase.prog .st{color:var(--h1)} .phase.comm .st{color:var(--h2)} .phase.rec .st,.phase.ext .st{color:var(--muted)}
+.phase.now{box-shadow:inset 0 3px 0 var(--accent)}
+.lanes{display:grid;gap:10px}
+.lane{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+@media (max-width:640px){.lane{grid-template-columns:1fr}}
+.lane .lh{display:grid;gap:4px;align-content:start}
+.lane .lh b{font:700 16px/1.1 var(--f-display);font-variation-settings:"wdth" 80}
+.lane .items{display:flex;flex-wrap:wrap;gap:6px}
+.ri{font-size:12.5px;padding:7px 10px;border-radius:6px;background:var(--surface-2);color:var(--ink);transition:opacity .15s}
+.ri small{font:600 10px/1 var(--f-mono);color:var(--muted);display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em}
+.ri.fade{opacity:.25}
+.nongoals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.nongoals{grid-template-columns:1fr}}
+.nongoals div{border:1px solid var(--line-2);border-radius:10px;padding:14px;font-size:13.5px;background:repeating-linear-gradient(135deg,transparent 0 8px,var(--surface-2) 8px 9px)}
+.nongoals b{display:block;font:700 14px/1.3 var(--f-display);font-variation-settings:"wdth" 90;margin-bottom:4px}
+
+/* refs */
+.refs-ctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.refs-ctrl input{font:14px var(--f-body);padding:9px 12px;border-radius:8px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);min-width:0;flex:1 1 220px;max-width:360px}
+.refcols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:820px){.refcols{grid-template-columns:1fr}}
+.reflist{display:grid;gap:2px;font-size:13px}
+.ref{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;padding:8px;border-radius:6px}
+.ref:target{background:var(--accent-soft)}
+.ref .id{font:600 11.5px/1.5 var(--f-mono);color:var(--accent)}
+.ref a{word-break:break-word;font-size:12px}
+.ref .ty{font:500 10px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-left:6px}
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);display:grid;gap:6px}
+</style>
+
+<div class="tip" id="tip" role="tooltip"></div>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brandmark"><i></i>LSEG INNOVATION THESIS</div>
+    <nav class="navlinks" aria-label="Sections">
+      <a href="#strategy"><b>1</b>Strategy vs rivals</a>
+      <a href="#products"><b>2</b>Products &amp; plays</a>
+      <a href="#platform"><b>3</b>Tech &amp; platform</a>
+      <a href="#roadmap"><b>→</b>Roadmap</a>
+      <a href="#sources"><b>§</b>Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Office of the CTO · Research cut-off 26 Sep 2026 · Baseline H1 2026</div>
+    <h1>From stock exchange<br>to the <span>trusted interoperability layer</span><br>of finance.</h1>
+    <div class="thesis">
+      <div style="display:grid;gap:16px">
+        <blockquote id="posture"></blockquote>
+        <div class="provenance">
+          <span class="tag disc">Disclosed</span><span>company-published or regulator fact, always cited</span>
+          <span class="tag ana">Analyst synthesis</span><span>this thesis's own judgement, not an LSEG label</span>
+        </div>
+      </div>
+      <div class="findings">
+        <div class="eyebrow">Headline findings</div>
+        <ul id="findings"></ul>
+      </div>
+    </div>
+    <div>
+      <div class="ticker" id="ticker"></div>
+      <div class="ticker-cap"><span>H1 2026 financial baseline: evidence the strategy is commercialising <a class="cite" href="#S-2">S-2</a></span><span>FY2026 guidance raised to 7.0–7.5% organic CC growth <a class="cite" href="#S-2">S-2</a><a class="cite" href="#S-3">S-3</a></span></div>
+    </div>
+  </div>
+
+  <!-- ===================== PART 1 ===================== -->
+  <section class="part" id="strategy">
+    <div class="part-head">
+      <div class="part-no">1</div>
+      <div class="eyebrow">Innovation strategy · LSEG and its rivals</div>
+      <p class="lede">LSEG runs a layered innovation system rather than one named framework. Each rival has picked a structurally different posture. Compare them here, then see where they meet head-on in four battlegrounds.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>How LSEG innovates today</h3><span class="tag disc">Disclosed</span></div>
+      <div class="fw" id="lseg-pillars"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Three lenses applied to LSEG</h3><span class="tag ana">Analyst synthesis</span></div>
+      <div class="fw">
+        <div class="card">
+          <div class="k">LENS 1 · CAPITAL ALLOCATION</div>
+          <h4>Three Horizons of Growth</h4>
+          <div class="hbar" role="img" aria-label="Horizon 1 about 70 percent, Horizon 2 about 20 percent, Horizon 3 about 10 percent (analytical estimate)">
+            <div style="width:70%;background:var(--h1)">H1 ~70%</div>
+            <div style="width:20%;background:var(--h2)">H2 ~20%</div>
+            <div style="width:10%;background:var(--h3)">H3</div>
+          </div>
+          <div class="hlegend">
+            <div><b>H1</b> Defend: FTSE Russell flagships, LCH SwapClear, core Workspace data</div>
+            <div><b>H2</b> Scale: LSEG Everywhere/MCP, World-Check On Demand, private-market indices, LSE 24</div>
+            <div><b>H3</b> Seed: DSD/DiSH, DMI tokenisation, agent-ready LSE 24</div>
+          </div>
+          <p class="small muted">Weights are analytical estimates. The risk is the "integration trap" of the Refinitiv estate crowding out H2/H3.</p>
+        </div>
+        <div class="card">
+          <div class="k">LENS 2 · DELIVERY CADENCE</div>
+          <h4>Dual-Track Agile</h4>
+          <div class="track">
+            <div><b>Discovery</b>Prototype AI features with tier-1 design partners before committing engineering capacity.</div>
+            <div><b>Delivery</b>Security-, entitlement- and audit-hardened releases into Workspace, Teams and Excel.</div>
+          </div>
+          <p class="small">Lets Workspace AI iterate on a near-weekly cadence while market-data engines stay change-controlled. It targets Bloomberg's more centrally gated Terminal releases.<a class="cite" href="#S-17">S-17</a><a class="cite" href="#S-18">S-18</a></p>
+        </div>
+        <div class="card">
+          <div class="k">LENS 3 · ECOSYSTEM</div>
+          <h4>Platform-Centric Open Innovation</h4>
+          <p class="small">LSEG exposes 33+ PB of AI-ready content through feeds, APIs, clouds and MCP instead of one closed application. Named channels: Microsoft Copilot Studio, Anthropic, OpenAI, Databricks, Snowflake, AWS and Google Cloud.</p>
+          <p class="small">Adoption so far: ~90 MCP-connected customers and 150+ onboarding (Q1 2026), &gt;200 enterprise engagements and ~17,000 AI Search users (H1 2026).<a class="cite" href="#S-2">S-2</a><a class="cite" href="#S-4">S-4</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <div style="display:grid;gap:4px"><h3>Rival innovation postures</h3><p class="small muted">Select a company to see its posture, its latest killer moves and how LSEG is positioned against it.</p></div>
+      </div>
+      <div class="rivals" id="rivals"></div>
+      <div class="card rv-detail" id="rv-detail"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <div style="display:grid;gap:4px"><h3>Innovation maturity scorecard</h3><p class="small muted">Scored 1 (limited visible capability) to 5 (leading and scaled). Low scores often reflect business-model focus, for example Bloomberg does not run market infrastructure.</p></div>
+        <span class="tag ana">Analyst synthesis · §6</span>
+      </div>
+      <div class="sc-grid">
+        <div class="card" style="display:grid;gap:12px">
+          <div class="block-head"><h4>All nine players by dimension</h4>
+            <div class="seq-legend" aria-hidden="true">1<span class="sw" style="background:var(--s1)"></span><span class="sw" style="background:var(--s2)"></span><span class="sw" style="background:var(--s3)"></span><span class="sw" style="background:var(--s4)"></span><span class="sw" style="background:var(--s5)"></span>5</div>
+          </div>
+          <div class="scroll-x"><table class="heat" id="heat"></table></div>
+          <p class="small muted">Group A (LSEG, Bloomberg, S&amp;P Global, Nasdaq, ICE) and Group B (LSEG, Deutsche Börse, CME, MSCI) are combined. LSEG scores identically in both. Select a column header to compare.</p>
+        </div>
+        <div class="card" style="display:grid;gap:12px;align-content:start">
+          <div class="block-head"><h4 id="db-title">LSEG vs Bloomberg</h4>
+            <div class="legend"><span><i style="background:var(--lseg)"></i>LSEG</span><span><i style="background:var(--rival)"></i><span id="db-rival">Bloomberg</span></span></div>
+          </div>
+          <div class="seg-ctrl" id="db-ctrl" role="group" aria-label="Choose rival"></div>
+          <svg id="dumbbell" viewBox="0 0 460 330" width="100%" role="img" aria-label="Dumbbell chart comparing LSEG with selected rival across eight dimensions"></svg>
+          <p class="small" id="db-read"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Four competitive battlegrounds</h3><span class="small muted">Competitive gap analysis and LSEG's innovation play by segment (§5)</span></div>
+      <div class="tabs" role="tablist" id="seg-tabs"></div>
+      <div id="seg-panel" class="card" style="display:grid;gap:18px" role="tabpanel"></div>
+    </div>
+  </section>
+
+  <!-- ===================== PART 2 ===================== -->
+  <section class="part" id="products">
+    <div class="part-head">
+      <div class="part-no">2</div>
+      <div class="eyebrow">Products &amp; services · proposed innovation vs rival products</div>
+      <p class="lede">Nine revenue-bearing products, each benchmarked against its nearest rival product with a horizon-tagged innovation play. Cards are sorted by CTO priority (§6.4). Switch horizon to see the whole portfolio at 0–18 months, 1–3 years or 3–5+ years.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <div class="hz-ctrl">
+          <span class="eyebrow">Show innovation at</span>
+          <div class="seg-ctrl" id="hz-ctrl" role="group" aria-label="Horizon">
+            <button data-h="H1" aria-pressed="true">H1 · 0–18 mo</button>
+            <button data-h="H2" aria-pressed="false">H2 · 1–3 yr</button>
+            <button data-h="H3" aria-pressed="false">H3 · 3–5+ yr</button>
+          </div>
+        </div>
+        <span class="tag ana">Recommended innovations are authored analysis</span>
+      </div>
+      <div class="pgrid" id="pgrid"></div>
+    </div>
+
+    <div class="pdetail" id="pdetail" aria-live="polite"></div>
+
+    <div class="block">
+      <div class="block-head"><div style="display:grid;gap:4px"><h3>Products &amp; services head-to-head</h3><p class="small muted">LSEG's principal commercial products against the closest rival offering (§7). Use it for positioning and sales-engineering conversations.</p></div>
+        <div class="seg-ctrl" id="h2h-ctrl" role="group" aria-label="Category"></div>
+      </div>
+      <div class="card scroll-x" style="padding:0"><table class="h2h" id="h2h"></table></div>
+      <p class="small muted" id="h2h-note"></p>
+    </div>
+  </section>
+
+  <!-- ===================== PART 3 ===================== -->
+  <section class="part" id="platform">
+    <div class="part-head">
+      <div class="part-no">3</div>
+      <div class="eyebrow">Technology, engineering &amp; platform strategy</div>
+      <p class="lede">The plays in Part 2 share a small set of platform capabilities. Fund them once, consume them nine times. The matrix maps each capability to the products whose blueprint depends on it. Select a product to read its engineering blueprint, or a capability to see where it is reused.</p>
+    </div>
+
+    <div class="patterns">
+      <div class="card"><div class="eyebrow">Pattern 1 · the common technical unlock</div><h4>Batch to real-time</h4><p>World-Check On Demand has already made the move. FTSE StepStone daily valuations, LCH intraday margin, TradeAgent lifecycle events and LSE 24 continuous trading need the same shift. Build one event-streaming and entitlement platform, funded once and consumed by all five products.</p></div>
+      <div class="card"><div class="eyebrow">Pattern 2 · the unmatched moat</div><h4>Cross-lifecycle fusion</h4><p>Every play no rival can replicate joins two or more lifecycle stages: Tradeweb execution with LCH margin, Workspace agents with FTSE Russell and LCH exposure, feeds with index membership. Single-line rivals do not own the adjacent business.</p></div>
+      <div class="card"><div class="eyebrow">Pattern 3 · platform counter to closed rivals</div><h4>Open, model-agnostic distribution</h4><p>Bloomberg BQL, MSCI Barra and CME's matching stack are closed by default. Extending MCP-first, multi-cloud openness across all nine products compounds differentiation against every closed rival at once.</p></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <div style="display:grid;gap:4px"><h3>Platform capability × product matrix</h3>
+        <div class="legend"><span><i style="background:var(--accent)"></i>Named element of the product's blueprint</span><span><i style="border:2px solid var(--accent);background:transparent;opacity:.7"></i>Dependency or guardrail that applies</span></div></div>
+        <span class="tag ana">Mapping derived from product blueprints &amp; §6–7</span>
+      </div>
+      <div class="card scroll-x" style="padding:8px 12px"><table class="mx" id="mx"></table></div>
+      <div class="chips" id="mx-reset" hidden><button class="chip" id="mx-clear">Clear selection <span class="arrow">×</span></button></div>
+    </div>
+
+    <div class="pdetail" id="bp-panel" aria-live="polite"></div>
+
+    <div class="block">
+      <div class="block-head"><h3>Segment-level transformation blueprints</h3><span class="small muted">Architecture required per battleground (§5.x.3) and concrete deliverables (§5.x.4)</span></div>
+      <div class="segbp" id="segbp"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Engineering operating model</h3><span class="small muted">How the platform gets built and funded</span></div>
+      <div class="opmodel">
+        <div class="card"><div class="eyebrow">Funding by horizon</div><h4>Three Horizons as a budget rule</h4>
+          <ul class="clean"><li><span class="hz H1">H1</span> Parity work funded from existing product P&amp;Ls</li><li><span class="hz H2">H2</span> Dedicated cross-functional squad and a 12–24-month payback case</li><li><span class="hz H3">H3</span> Small, reversible option bets that de-risk tokenisation, agentic AI and 24/7 markets</li></ul></div>
+        <div class="card"><div class="eyebrow">Delivery</div><h4>Dual-Track per product</h4>
+          <p>Each product runs a standing Discovery track (3–5 design-partner clients, feasibility spikes on the common data/AI platform, compliance pre-clearance). It feeds a Delivery track that ships production increments. AI feature velocity then never forces re-certification of the core market-data engine.</p></div>
+        <div class="card"><div class="eyebrow">Group engineering pillars</div><h4>Talent · common platforms · product discipline</h4>
+          <p>LSEG's three official pillars are designed to raise speed and quality while controlling cost and risk, and to make AI adoption faster and cheaper.<a class="cite" href="#S-1">S-1</a><a class="cite" href="#S-3">S-3</a> Common platforms carry scale. Businesses keep domain product ownership.</p></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><div style="display:grid;gap:4px"><h3>Security, privacy, risk &amp; compliance guardrails</h3><p class="small muted">Engineered into the architecture as first-class requirements rather than added as a compliance overlay (strategy §8, product §7)</p></div></div>
+      <div class="callout">
+        <div class="eyebrow">The most material CTO-level risk is regulatory and architectural</div>
+        <p>LSEG's transformation concentrates mission-critical dependency on Microsoft Azure. The EU has designated Microsoft a DORA Critical Third-Party Provider, subject to direct oversight, exit-strategy testing and 4-hour major-incident reporting. Legal accountability for resilience stays with LSEG.<a class="cite" href="#S-42">S-42</a><a class="cite" href="#S-43">S-43</a></p>
+      </div>
+      <div class="guard" id="guard"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><div style="display:grid;gap:4px"><h3>Value realisation &amp; KPI scorecard</h3><p class="small muted">Line of sight from strategic layer to financial outcome through ~2029 (§9)</p></div></div>
+      <div class="card scroll-x" style="padding:6px 8px"><table class="kpi" id="kpi"></table></div>
+    </div>
+  </section>
+
+  <!-- ===================== ROADMAP ===================== -->
+  <section class="part" id="roadmap">
+    <div class="part-head">
+      <div class="part-no">→</div>
+      <div class="eyebrow">Roadmap · 2022 to 2031</div>
+      <p class="lede">The group timeline (strategy §10.2) and the product milestones by horizon (product §8). Select a product to highlight its path across horizons.</p>
+    </div>
+    <div class="phases" id="phases"></div>
+    <div class="block">
+      <div class="block-head"><h3>Product milestones by horizon</h3><div class="chips" id="rm-filter"></div></div>
+      <div class="lanes" id="lanes"></div>
+    </div>
+    <div class="block">
+      <div class="block-head"><h3>Priority order for the CTO agenda</h3><span class="small muted">Strategy §10.1</span></div>
+      <details class="acc" open><summary>Seven priorities, in order</summary><div class="in"><ol class="clean" id="prio" style="padding-left:20px"></ol></div></details>
+    </div>
+    <div class="block">
+      <div class="block-head"><h3>Deliberate non-goals</h3><span class="small muted">What LSEG should not attempt to out-build (§10.3)</span></div>
+      <div class="nongoals">
+        <div><b>Bloomberg's closed-terminal network</b>A different business model rather than a gap to close. The Teams-channel pilot stays small and reversible.</div>
+        <div><b>Nasdaq's market-tech SaaS, feature for feature</b>A multi-year, capital-intensive re-platforming with uncertain payoff compared with LSEG's own strengths.</div>
+        <div><b>Retail crypto-speculation volume</b>The defensible ground is institutional collateral, private markets and regulated, DSD-settled tokenisation.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOURCES ===================== -->
+  <section class="part" id="sources">
+    <div class="part-head">
+      <div class="part-no">§</div>
+      <div class="eyebrow">Sources · independently numbered per document</div>
+      <p class="lede"><b class="mono">S-n</b> cites the Strategy &amp; Competitive Benchmarking document (52 sources). <b class="mono">P-n</b> cites the Product Innovation Roadmap (39 sources). The same number points to a different source in each list.</p>
+    </div>
+    <div class="refs-ctrl">
+      <label for="ref-q" class="eyebrow">Search</label>
+      <input id="ref-q" type="search" placeholder="e.g. Verafin, DORA, Tradeweb">
+      <div class="seg-ctrl" id="ref-type" role="group" aria-label="Source type">
+        <button data-t="all" aria-pressed="true">All</button>
+        <button data-t="LSEG" aria-pressed="false">LSEG</button>
+        <button data-t="Rival" aria-pressed="false">Rival</button>
+        <button data-t="Regulator" aria-pressed="false">Regulator</button>
+        <button data-t="Press" aria-pressed="false">Press &amp; other</button>
+      </div>
+    </div>
+    <div class="refcols">
+      <div class="block"><h3>Strategy document <span class="muted mono small">S-1…S-52</span></h3><div class="reflist" id="refs-S"></div></div>
+      <div class="block"><h3>Product document <span class="muted mono small">P-1…P-39</span></h3><div class="reflist" id="refs-P"></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Built from “LSEG Innovation Strategy &amp; Competitive Benchmarking” and “LSEG Product Innovation Roadmap &amp; Competitive Benchmarking”, prepared for the Office of the CTO, 26 Sep 2026. No figures were added beyond those two documents.</div>
+    <div>Company marks are typographic wordmark badges for identification only. They are not official logo artwork, and trademarks belong to their owners.</div>
+  </footer>
+</main>
+
+<script>
+(function(){
+/* ---------- citation helper: "text [S:2,52] more [P:4]" ---------- */
+function C(s){
+  return String(s).replace(/\[(S|P):([\d,\s]+)\]/g,function(_,d,n){
+    return n.split(',').map(function(x){x=x.trim();return '<a class="cite" href="#'+d+'-'+x+'" data-ref="'+d+'-'+x+'">'+d+'-'+x+'</a>';}).join('');
+  });
+}
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+/* ---------- hero ---------- */
+$('posture').innerHTML=C("LSEG's most defensible long-run position is to become the trusted interoperability and AI-distribution layer between traditional and tokenised finance. That means converting open data, open APIs/MCP, regulated market infrastructure and cross-lifecycle breadth into a composable platform narrower rivals cannot replicate, with cyber-resilience, model governance and vendor-concentration management treated as product architecture.");
+var findings=[
+ "LSEG is a co-leader, not the outright leader. It leads on cross-lifecycle breadth and open, model-agnostic AI distribution, and trails Bloomberg (workflow density), Nasdaq (market-tech SaaS), Deutsche Börse (EU digital securities) and MSCI (private-asset intelligence). [S:2,52]",
+ "The largest lever is the 10-year Microsoft partnership: a minimum $2.8bn cloud commitment and a ~4% Microsoft equity stake. It underwrites Azure migration, M365 interoperability and the first MCP connector in Copilot Studio. [S:6,7,9]",
+ "Rivals have chosen different postures: a closed terminal moat (Bloomberg), market tech sold as SaaS (Nasdaq), Google Cloud + D7 + SimCorp (Deutsche Börse), cloud-native matching (CME), and AI concentrated on research (MSCI, S&P/Kensho). [S:17,19,22,30,34]",
+ "The top risk is regulatory and architectural: Azure concentration at the moment Microsoft became a DORA CTPP. [S:42,43]"
+];
+$('findings').innerHTML=findings.map(function(f){return '<li>'+C(f)+'</li>';}).join('');
+var ticks=[["+8.4%","Organic CC income growth","Markets +11.9%"],["+6.1%","D&A Annual Subscription Value","core recurring health"],["92.8%","Revenue retention","switching-cost signal"],["52.7%","Adj. EBITDA margin","+320bps YoY"],["25.0%","New Product Vitality Index","rev. from ≤5-yr products"],["£482m","Trailing 12-mo gross sales","pipeline strength"],[">200","LSEG Everywhere / MCP engagements","enterprise accounts"],["~17k","Workspace AI Search users","~7k Deep Research"]];
+$('ticker').innerHTML=ticks.map(function(t){return '<div class="tick"><span class="v">'+t[0]+'</span><span class="l">'+t[1]+'</span><span class="d">'+t[2]+'</span></div>';}).join('');
+
+/* ---------- LSEG pillars ---------- */
+var pillars=[
+ {k:"ENGINEERING TRANSFORMATION · 3 PILLARS",t:"Talent, common platforms, product discipline",b:"Shift from post-Refinitiv integration to a platform-product operating model: shared infrastructure, data and engineering services, with product accountability tied to commercial outcomes. [S:1,3]"},
+ {k:"LSEG EVERYWHERE · AI STRATEGY",t:"Trusted Data · Transformative Products · Intelligent Enterprise",b:"A deliberately model-agnostic approach. Licensed data is distributed into Microsoft, Anthropic, OpenAI, Databricks, Snowflake, AWS and Google Cloud ecosystems, with MCP carrying permissions, context and auditability. [S:1,5,6,9]"},
+ {k:"REGULATED DIGITAL INFRASTRUCTURE",t:"LSE 24 · DSD · DiSH · DMI · PSM",b:"A regulated bridge to tokenised finance. LSE 24 client testing is targeted for end-2026 with ETPs in H1 2027. [S:10] DMI is live for private funds with Apex, and Payward xStocks are planned for 2027. [S:11,12,13]"}
+];
+$('lseg-pillars').innerHTML=pillars.map(function(p){return '<div class="card"><div class="k">'+p.k+'</div><h4>'+p.t+'</h4><p class="small">'+C(p.b)+'</p></div>';}).join('');
+
+/* ---------- companies ---------- */
+var CO={
+ LSEG:{n:"LSEG",mk:"LS",c:"#1747C4"},
+ BBG:{n:"Bloomberg",mk:"B",c:"#1a1a1a"},
+ SPG:{n:"S&P Global",mk:"S&P",c:"#C8102E"},
+ FDS:{n:"FactSet",mk:"FS",c:"#0B6FB8"},
+ MSCI:{n:"MSCI",mk:"M",c:"#20124D"},
+ NDAQ:{n:"Nasdaq",mk:"N",c:"#0090BA"},
+ ICE:{n:"ICE / NYSE",mk:"ICE",c:"#1F4E79"},
+ CME:{n:"CME Group",mk:"CME",c:"#0A3A7E"},
+ DB:{n:"Deutsche Börse",mk:"DB",c:"#00355F"},
+ MKTX:{n:"MarketAxess",mk:"MA",c:"#5B2C83"}
+};
+function logo(id){var o=CO[id];return '<span class="logo"><span class="mk" style="background:'+o.c+'">'+esc(o.mk)+'</span><span class="wm">'+esc(o.n)+'</span></span>';}
+
+var RIV=[
+ {id:"BBG",pos:"Closed, integrated terminal-plus-network moat",src:"[S:17]",
+  moves:[["Data & Analytics","Gen-AI Document Insights and Terminal-native summarisation over a 350,000+ user network and chat graph. [S:17,18]"],["Data & Analytics","Instant Bloomberg chat: a closed, compliance-archived interbank network, the Terminal's deepest moat."]],
+  lseg:"Workspace is modern and modular with growing AI adoption, but Bloomberg's workflow density and community network effect remain structurally stronger. LSEG counters with open MCP distribution and terminal-free ubiquity inside Microsoft 365.",
+  play:"Don't rebuild the closed network. Make LSEG the invisible layer under every other destination."},
+ {id:"SPG",pos:"Centralised AI research engine (Kensho) feeding Capital IQ Pro, Ratings and S&P DJI",src:"[S:19]",
+  moves:[["Data & Analytics","Kensho: LLM-ready APIs, entity linking and >$1bn cumulative AI investment. [S:19,20]"],["Indices","Kensho thematic/AI indices cross-sold with Ratings and Market Intelligence."]],
+  lseg:"LSEG has broader direct control of execution, clearing and post-trade, but S&P has a more visible, centrally branded AI research story.",
+  play:"Answer with cross-lifecycle breadth (data + index + clearing) that Kensho cannot reach."},
+ {id:"FDS",pos:"Fast iteration inside a narrow banker, analyst and wealth workflow",src:"[S:28]",
+  moves:[["Data & Analytics","AI-Powered Pitch Creator auto-assembles banker pitch books inside the Workstation. [S:28]"]],
+  lseg:"LSEG has far greater data, workflow and infrastructure breadth. FactSet iterates faster in its narrower focus and is often positioned as lower cost. [S:51]",
+  play:"Ship a Workspace Research Agent that matches Pitch Creator on speed and adds clearing and index depth."},
+ {id:"MSCI",pos:"AI concentrated on research, private assets and portfolio intelligence",src:"[S:25,26]",
+  moves:[["Indices","AI Portfolio Insights and an AI-native private-assets pipeline ingesting unstructured documents. [S:25,26]"],["Indices","Indices embedded directly inside Barra/risk software: benchmark and analytics in one product."]],
+  lseg:"FTSE Russell is strong in ETF, fixed-income, sustainability and digital-asset indices, but MSCI is further ahead on AI-native private-asset processing.",
+  play:"Extend StepStone daily valuations into a Private Markets Copilot and make indices queryable via MCP."},
+ {id:"NDAQ",pos:"Productising its own market technology as external SaaS",src:"[S:22,40]",
+  moves:[["Capital Markets","23/5-toward-24/5 markets, SEC-approved tokenised equities (Mar 2026) and the Eqlipse platform sold as SaaS."],["Risk & Post-Trade","Verafin agentic AI workforce (750+ clients) and Entity Research Copilot on a 2,800+ FI consortium. [S:22,23]"]],
+  lseg:"LSE 24 is directionally aligned but later. World-Check is real-time and API-first, but LSEG has not matched Verafin's agentic investigation automation.",
+  play:"'Sovereign Agents': World-Check investigation copilots that run inside the client's own perimeter, with no data pooling."},
+ {id:"ICE",pos:"24/7 tokenised venue plus deterministic on-premises core matching",src:"[S:37,39]",
+  moves:[["Capital Markets","Planned 24/7 regulated tokenised-securities venue (Jan 2026), linked to the underlying security. [S:39]"],["Capital Markets","SEC innovation exemption for tokenised NMS stock (Sep 2026). [S:48]"]],
+  lseg:"LSEG's multi-asset breadth (equities, FX, Tradeweb, post-trade) exceeds ICE's single-venue play, but ICE is ahead on a regulator-cleared 24/7 tokenised design.",
+  play:"Sequence LSE 24 ETPs first, then bring Payward tokenised equities onto DSD settlement."},
+ {id:"CME",pos:"Deepest cloud-native core-matching transformation (Google Cloud)",src:"[S:34,35,36]",
+  moves:[["Capital Markets","10-year Google Cloud partnership and a private cloud region in Aurora, IL for ultra-low-latency matching. [S:34,35]"],["Risk & Post-Trade","Collateral tokenisation exploration via Google Cloud Universal Ledger. [S:36]"]],
+  lseg:"The Azure relationship is broader in scope, but CME's cloud-native matching is deeper for its single derivatives use case. LCH's multi-asset OTC breadth exceeds CME Clearing.",
+  play:"Build the 'collateral utility': intraday tokenised-collateral mobility anchored on LCH netting."},
+ {id:"DB",pos:"Google Cloud + D7 digital securities + SimCorp buy-side software",src:"[S:30,31,32,33]",
+  moves:[["Capital Markets","D7 platform: >45,000 digital issuances a week and >€90bn in volume. [S:32,33]"],["Risk & Post-Trade","Unified Eurex Clearing, Clearstream custody and D7 issuance stack, with >75% cloud adoption. [S:31]"]],
+  lseg:"DMI/DSD/DiSH is credible but earlier stage. Deutsche Börse has the more mature, end-to-end European digital-securities narrative.",
+  play:"Use a converged TradeAgent + DSD/DiSH post-trade fabric that covers derivatives lifecycle events D7 does not."},
+ {id:"MKTX",pos:"AI trade ideas for fixed-income execution (product-level rival to Tradeweb)",src:"[P:30]",
+  moves:[["Tradeweb","AIQ Insight with AIQ Markets (2026): real-time, data-driven trade ideas for bond traders."]],
+  lseg:"Tradeweb has no named AI trade-idea product yet. Its unique asset is common ownership with LCH clearing.",
+  play:"Tradeweb AI Execution Advisor, then all-in execution-plus-LCH-margin cost."}
+];
+var selRiv="BBG";
+function drawRivals(){
+  $('rivals').innerHTML=RIV.map(function(r){return '<button class="rv" data-id="'+r.id+'" aria-pressed="'+(r.id===selRiv)+'">'+logo(r.id)+'<span class="pos">'+esc(r.pos)+'</span></button>';}).join('');
+  var r=RIV.filter(function(x){return x.id===selRiv;})[0];
+  $('rv-detail').innerHTML='<div style="display:grid;gap:14px;align-content:start">'+logo(r.id)+'<dl><div><dt>Innovation posture</dt><dd>'+C(esc(r.pos)+' '+r.src)+'</dd></div><div><dt>LSEG position against '+esc(CO[r.id].n)+'</dt><dd>'+C(r.lseg)+'</dd></div><div><dt>Recommended counter-play</dt><dd><span class="tag ana" style="margin-right:6px">Analysis</span>'+C(r.play)+'</dd></div></dl></div><div style="display:grid;gap:10px;align-content:start"><div class="eyebrow">Latest killer moves</div><div class="moves">'+r.moves.map(function(m){return '<div class="move"><div class="seg">'+esc(m[0])+'</div>'+C(m[1])+'</div>';}).join('')+'</div></div>';
+  Array.prototype.forEach.call($('rivals').querySelectorAll('.rv'),function(b){b.onclick=function(){selRiv=b.dataset.id;drawRivals();};});
+}
+drawRivals();
+
+/* ---------- scorecard ---------- */
+var DIMS=["Trusted proprietary data","Open ecosystem / API / AI distribution","Embedded professional workflows","External market-tech SaaS","Trading / clearing infrastructure","Digital assets / tokenisation","AI research depth (visible)","Cross-lifecycle integration"];
+var SC={LSEG:[5,5,4,3,5,3,3,5],BBG:[5,3,5,2,1,2,5,3],SPG:[5,4,4,3,1,2,5,3],NDAQ:[4,4,4,5,4,4,4,4],ICE:[4,3,4,4,5,3,3,5],DB:[4,4,4,4,5,5,4,5],CME:[3,3,3,2,5,3,3,3],MSCI:[5,4,4,3,1,3,4,3]};
+var SCO=["LSEG","BBG","SPG","NDAQ","ICE","DB","CME","MSCI"];
+var SHORT={LSEG:"LSEG",BBG:"BBG",SPG:"S&P",NDAQ:"NDAQ",ICE:"ICE",DB:"DB1",CME:"CME",MSCI:"MSCI"};
+var selDB="BBG";
+var tip=$('tip');
+function showTip(e,html){tip.innerHTML=html;tip.classList.add('on');var x=e.clientX+14,y=e.clientY+14;var w=tip.offsetWidth,h=tip.offsetHeight;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+h>innerHeight-8)y=e.clientY-h-14;tip.style.left=x+'px';tip.style.top=y+'px';}
+function hideTip(){tip.classList.remove('on');}
+function drawHeat(){
+  var h='<thead><tr><th class="dim"></th>'+SCO.map(function(c){return '<th scope="col" class="'+(c===selDB?'col-sel':'')+'" data-c="'+c+'" style="cursor:'+(c==='LSEG'?'default':'pointer')+'">'+esc(SHORT[c])+'</th>';}).join('')+'</tr></thead><tbody>';
+  DIMS.forEach(function(d,i){
+    h+='<tr><th class="dim" scope="row">'+esc(d)+'</th>'+SCO.map(function(c){var v=SC[c][i];return '<td><div class="c" data-t="'+esc(CO[c].n)+' · '+esc(d)+': <b>'+v+'</b>/5" style="background:var(--s'+v+');color:var('+(v>=4?'--s-ink-hi':'--s-ink-lo')+')">'+v+'</div></td>';}).join('')+'</tr>';
+  });
+  $('heat').innerHTML=h+'</tbody>';
+  Array.prototype.forEach.call($('heat').querySelectorAll('.c'),function(el){el.onmousemove=function(e){showTip(e,el.dataset.t);};el.onmouseleave=hideTip;});
+  Array.prototype.forEach.call($('heat').querySelectorAll('thead th[data-c]'),function(th){if(th.dataset.c!=='LSEG')th.onclick=function(){selDB=th.dataset.c;drawScore();};});
+}
+function drawDB(){
+  $('db-ctrl').innerHTML=SCO.filter(function(c){return c!=='LSEG';}).map(function(c){return '<button data-c="'+c+'" aria-pressed="'+(c===selDB)+'">'+esc(CO[c].n)+'</button>';}).join('');
+  Array.prototype.forEach.call($('db-ctrl').querySelectorAll('button'),function(b){b.onclick=function(){selDB=b.dataset.c;drawScore();};});
+  $('db-title').textContent='LSEG vs '+CO[selDB].n;$('db-rival').textContent=CO[selDB].n;
+  var W=460,L=196,R=446,T=26,rowH=37;
+  function x(v){return L+(v-1)*(R-L)/4;}
+  var s='';
+  for(var v=1;v<=5;v++){s+='<line x1="'+x(v)+'" x2="'+x(v)+'" y1="'+(T-8)+'" y2="'+(T+rowH*8-14)+'" stroke="var(--line)" stroke-width="1"/><text x="'+x(v)+'" y="'+(T-12)+'" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="IBM Plex Mono">'+v+'</text>';}
+  var ahead=0,behind=0,tied=0,lines=[];
+  DIMS.forEach(function(d,i){
+    var y=T+i*rowH+8,a=SC.LSEG[i],b=SC[selDB][i];
+    if(a>b)ahead++;else if(a<b){behind++;lines.push(d);}else tied++;
+    s+='<text x="0" y="'+(y+4)+'" font-size="11.5" fill="var(--ink)">'+esc(d.length>32?d.slice(0,31)+'…':d)+'</text>';
+    s+='<line x1="'+x(Math.min(a,b))+'" x2="'+x(Math.max(a,b))+'" y1="'+y+'" y2="'+y+'" stroke="var(--line-2)" stroke-width="2"/>';
+    if(a===b){
+      s+='<circle cx="'+x(a)+'" cy="'+(y-4)+'" r="6" fill="var(--lseg)" stroke="var(--surface)" stroke-width="2"/><circle cx="'+x(b)+'" cy="'+(y+4)+'" r="6" fill="var(--rival)" stroke="var(--surface)" stroke-width="2"/>';
+    }else{
+      s+='<circle cx="'+x(b)+'" cy="'+y+'" r="6" fill="var(--rival)" stroke="var(--surface)" stroke-width="2"/><circle cx="'+x(a)+'" cy="'+y+'" r="6" fill="var(--lseg)" stroke="var(--surface)" stroke-width="2"/>';
+    }
+    s+='<rect x="0" y="'+(y-rowH/2)+'" width="'+W+'" height="'+rowH+'" fill="transparent" data-t="'+esc(d)+'<br>LSEG <b>'+a+'</b> · '+esc(CO[selDB].n)+' <b>'+b+'</b>"/>';
+  });
+  $('dumbbell').innerHTML=s;
+  Array.prototype.forEach.call($('dumbbell').querySelectorAll('rect[data-t]'),function(el){el.onmousemove=function(e){showTip(e,el.dataset.t);};el.onmouseleave=hideTip;});
+  $('db-read').innerHTML='LSEG is ahead on <b>'+ahead+'</b>, level on <b>'+tied+'</b> and behind on <b>'+behind+'</b> of 8 dimensions'+(lines.length?' (behind on: '+lines.map(esc).join('; ')+').':'.');
+}
+function drawScore(){drawHeat();drawDB();}
+drawScore();
+
+/* ---------- segments ---------- */
+var SEG=[
+ {id:"da",n:"Data & Analytics Workspaces",riv:["BBG","SPG","FDS"],prods:["ws","feeds","api"],
+  gap:[["Bloomberg","Gen-AI Document Insights and Terminal-native summarisation over a 350,000+ user network and chat graph.","Workspace is modern and modular with growing AI Search/Deep Research (~17k / ~7k users), but Bloomberg's workflow density and network effect remain stronger."],
+       ["S&P Capital IQ Pro","Kensho: a centralised AI hub, LLM-ready APIs, entity linking and >$1bn cumulative AI investment.","Broader control of execution, clearing and post-trade, but a less visible, centralised AI research engine than Kensho."],
+       ["FactSet","AI-Powered Pitch Creator, advisor dashboards and embedded gen-AI research for bankers and wealth.","Materially greater breadth, but FactSet iterates faster inside its narrower workflow."]],
+  playT:"Terminal-free ubiquity",
+  play:"Weaponise the Microsoft 365/Teams alliance so LSEG becomes the default reasoning layer inside Excel, Outlook, Teams and Copilot. Bloomberg wins as the indispensable destination. LSEG's play is to be the invisible, always-present layer under every destination.",
+  pts:["AI Search and Deep Research become the default 'ask the market' interface inside M365 Copilot","MCP is the neutral rail: point Claude, OpenAI or in-house agents at LSEG content without vendor lock-in","Compete on TCO in the $22k–$24k/user/year band by cutting parallel terminal seats [S:51]"],
+  bp:["Semantic/knowledge-graph layer with stable identifiers (issuer → instrument → index → exposure)","Entitlement-aware MCP retrieval: identity, licence scope, lineage and citation on every call","Dual-Track release pipeline separating AI discovery from hardened delivery","Consumption metering for API/MCP calls, agent invocations and Deep Research queries"],
+  ex:["'Copilot for Fixed Income Research' skill in M365 Copilot with inline citations to LSEG datasets","Semantic entity-resolution API as a first-class MCP tool: bond → issuer's FTSE Russell weight → LCH exposure","Dual-Track pitchbook pilot with 3–5 tier-1 banks, shipped as a Workspace/Teams add-in"]},
+ {id:"ix",n:"Indices & Benchmarking",riv:["MSCI","SPG"],prods:["ftse"],
+  gap:[["MSCI","AI Portfolio Insights and an AI-native private-assets pipeline building public-plus-private benchmarks.","Strong ETF, fixed-income, sustainability, private-market and digital-asset innovation (44 equity ETF launches in 2025; 28 in Q1 2026), but MSCI is further ahead on AI-native private assets."],
+       ["S&P Dow Jones Indices","Kensho thematic/AI indices backed by S&P Global's >$1bn AI research investment and cross-sell.","Index scale plus LSEG's broader data ecosystem, but S&P DJI has the more visible, centrally branded AI story."]],
+  playT:"Conversational index construction",
+  play:"Clients describe an investment thesis in natural language. FTSE Russell's methodology engine proposes, backtests and documents a compliant custom index in near-real time, in a cloud sandbox, instead of a multi-week bespoke request cycle.",
+  pts:["Extend FTSE StepStone private-market and digital-asset indices with AI document ingestion","Fuse methodology with Risk Intelligence and World-Check for sanctions-screened ESG variants"],
+  bp:["Quant sandbox-as-a-service: Azure-hosted, MCP-addressable backtesting","Document-to-index AI pipeline normalising private-market documents into the shared semantic graph","Governance-by-design: versioning and audit trails for any AI-assisted methodology change (UK/EU BMR)"],
+  ex:["'FTSE Russell Index Sandbox' MCP tool, benchmarked against MSCI AI Portfolio Insights turnaround","Extend FTSE StepStone to previously 'too fragmented' private-credit categories within two review cycles","Joint FTSE Russell + World-Check 'sanctions-aware ESG index'"]},
+ {id:"cm",n:"Capital Markets & Institutional Venues",riv:["NDAQ","ICE","CME","DB"],prods:["lse24","tw","lch"],
+  gap:[["Nasdaq","23/5-toward-24/5, SEC-approved tokenised equity (Mar 2026), Eqlipse platform sold as SaaS.","LSE 24 targets client testing by end-2026 and ETPs in H1 2027. Directionally aligned, but Nasdaq is further along."],
+       ["ICE / NYSE","Planned 24/7 regulated tokenised venue (Jan 2026) and on-premises deterministic matching.","Greater multi-asset breadth, but ICE is ahead on a regulator-cleared 24/7 tokenised design."],
+       ["CME Group","10-year Google Cloud partnership, Aurora private cloud region for ULL matching, Universal Ledger tokenisation.","The Azure relationship is broader, but CME's cloud-native matching is deeper for one derivatives use case."],
+       ["Deutsche Börse","Google Cloud partnership, D7 (>45k issuances/week, >€90bn) and the SimCorp buy-side acquisition.","DMI/DSD/DiSH is credible but earlier stage. DB has the more mature EU digital-securities narrative."]],
+  playT:"The collateral utility",
+  play:"Focus 24/7-style infrastructure on tokenised bonds, collateral and private-market assets. This solves institutional liquidity-trap and collateral-mobility problems instead of chasing retail-adjacent crypto volume.",
+  pts:["Sequence LSE 24 deliberately: ETPs first, equities later","Anchor tokenised-collateral settlement on LCH's multilateral netting instead of building a parallel stack"],
+  bp:["Agent-safe market access: authenticated agent identity, deterministic pre-trade checks, policy engines, immutable audit","Continuous-operations engineering: rolling maintenance, active-active, continuous surveillance and collateral monitoring","Interoperable settlement money: commercial-bank money, tokenised deposits and central-bank rails (cf. ECB Pontes)","Selective cloud-native matching, per asset class (Nasdaq AWS Outposts vs CME Google ULL patterns)"],
+  ex:["LSE 24 ETP client testing by end-2026 with a published off-hours spread/liquidity benchmark","Tokenised-gilt collateral-mobility pilot through DiSH with Post Trade Solutions banks","Publish an 'agent-safe FMI' architecture standard before enabling agentic order flow"]},
+ {id:"rp",n:"Risk, Clearing & Post-Trade",riv:["CME","DB","NDAQ"],prods:["lch","pts","wc"],
+  gap:[["CME Clearing","Google Cloud-native clearing and data workloads plus a dedicated private cloud region.","LCH's cross-currency, multi-asset OTC breadth (the majority of global OTC IRD) exceeds CME's, but CME's cloud clearing engineering is more advanced for its scope."],
+       ["Eurex Clearing","Integrated settlement, custody and digital-securities clearing through Clearstream and D7.","LCH + Post Trade Solutions (11 banks) + TradeAgent + DiSH is credible but less unified."],
+       ["Nasdaq Verafin","Agentic AI workforce (750+ clients by Q2 2026) and Entity Research Copilot on a 2,800+ FI consortium.","World-Check On Demand is real-time, and the Sanctioned Securities Data File goes to instrument level, but there is no agentic investigation workflow yet."]],
+  playT:"Sovereign Agents",
+  play:"Privacy-first, on-premises-capable AI that automates compliance and investigation inside the client's firewall. It counters Nasdaq's centrally hosted, consortium-data model for institutions wary of cross-institution data pooling.",
+  pts:["Turn World-Check's entity data into an agentic AML/KYC copilot","Extend Sanctioned Securities logic into embedded, machine-consumable controls across onboarding, payments and monitoring"],
+  bp:["Real-time, API-first Risk Intelligence services that are agent-compatible","Air-gapped / sovereign deployment pattern for World-Check-grounded agents","T+1-ready post-trade automation: event-driven, golden-source data, auto-affirmation (T+1 from 11 Oct 2027)","Explainable-AI audit trails at regulator grade, by design"],
+  ex:["World-Check 'Investigation Copilot' pilot with 3–5 banks, benchmarked against Verafin on investigator time saved","Sovereign/private-cloud tier of World-Check On Demand for data-residency jurisdictions","Joint LCH + TradeAgent T+1 automation package with a published STP rate"]}
+];
+var selSeg="da";
+function drawSeg(){
+  $('seg-tabs').innerHTML=SEG.map(function(s){return '<button role="tab" data-id="'+s.id+'" aria-selected="'+(s.id===selSeg)+'">'+esc(s.n)+'</button>';}).join('');
+  var s=SEG.filter(function(x){return x.id===selSeg;})[0];
+  var h='<div class="block-head"><div class="chips">'+s.riv.map(logo).join('<span class="muted" style="align-self:center">·</span>')+'</div><span class="tag disc">Gap evidence: company disclosures</span></div>';
+  h+='<div class="scroll-x"><table class="gap-table"><thead><tr><th>Rival</th><th>Latest technical killer move</th><th>LSEG current position</th></tr></thead><tbody>'+s.gap.map(function(g){return '<tr><td><b>'+esc(g[0])+'</b></td><td class="rv-c">'+C(g[1])+'</td><td class="ls-c">'+C(g[2])+'</td></tr>';}).join('')+'</tbody></table></div>';
+  h+='<div class="play"><div class="play-box"><div class="eyebrow">LSEG innovation play · analysis</div><h4>'+esc(s.playT)+'</h4><p class="small">'+C(s.play)+'</p><ul class="clean">'+s.pts.map(function(p){return '<li>'+C(p)+'</li>';}).join('')+'</ul></div>';
+  h+='<div style="display:grid;gap:10px;align-content:start"><div class="eyebrow">Products in this battleground</div><div class="chips">'+s.prods.map(function(p){var o=PR[p];return '<button class="chip" data-go="'+p+'">'+esc(o.n)+' <span class="arrow">→</span></button>';}).join('')+'</div><p class="small muted">Open a product to see its horizon-tagged plays (Part 2) and engineering blueprint (Part 3).</p></div></div>';
+  $('seg-panel').innerHTML=h;
+  Array.prototype.forEach.call($('seg-tabs').querySelectorAll('button'),function(b){b.onclick=function(){selSeg=b.dataset.id;drawSeg();};});
+  bindGo($('seg-panel'));
+}
+
+/* ---------- products ---------- */
+var PR={
+ ws:{n:"Workspace",full:"Workspace (AI Search & Deep Research)",div:"Data & Analytics",vs:["BBG","SPG","FDS"],vsTxt:"Bloomberg Terminal, S&P Capital IQ Pro, FactSet Workstation",rank:5,why:"Closes the most visible analyst-facing gap against FactSet and Capital IQ Pro. High commercial visibility, moderate technical risk given the AI Search/Deep Research foundation.",
+  intro:"The Eikon successor, combining data, news, fundamentals and analytics with AI Search and Deep Research. ~17,000 active AI Search users, and Tradeweb fixed-income analytics are being integrated in H1 2026. [P:1,4]",
+  gap:[["Conversational / agentic AI","Search-and-summarise over licensed content","Bloomberg Gen AI Document Insights and ASKB, coupled to BQL and 350k+ seats"],["Deliverable automation","No native equivalent; export to Excel/PowerPoint","FactSet AI-Powered Pitch Creator builds pitch books in minutes"],["Research-grade gen analytics","Deeper computation needs separate modules","Capital IQ Pro Kensho tools: transcript Q&A, modelling assistance, $1bn+ AI spend"],["Communications network","Reach into 300m+ commercial Teams users, but no trading-chat network","Instant Bloomberg: closed, compliance-archived interbank chat"]],
+  playT:"Terminal-free ubiquity",play:"Make Workspace data, analytics and agentic AI reachable wherever analysts already work (Excel, Teams, Outlook, Copilot Studio, third-party agents via MCP). This turns Bloomberg's closed terminal into a liability for cross-platform workflows.",
+  H1:"Workspace Research Agent: auto-assembled comps and pitch decks grounded in cited, permissioned LSEG data",H2:"Multi-step agentic Deep Research: mandate → data → FTSE Russell and LCH cross-check → cited draft",H3:"Compliance-archived, cross-institution Teams channel for capital markets, contesting Instant Bloomberg",
+  ex:"A leveraged-finance banker asks for a comp set and pitch draft for a $500m European industrials high-yield issue. The agent pulls comparables from Data & Feeds, screens with FTSE Russell classification and Green Revenue flags, checks LCH RepoClear collateral eligibility and drafts a PowerPoint deck via Microsoft Graph, with every figure linked to its source.",
+  cto:"(1) Model governance: every figure traceable to a licensed source. (2) Information barriers: agent tool-calls respect entitlements and MNPI controls, including in Teams. (3) Data residency for models and vector stores.",
+  bp:["Semantic data graph across entities, instruments, filings, news and estimates","Domain-tuned models hosted via Azure Model-as-a-Service, with RAG limited to entitlement-checked content","Research Agent exposed as both a Workspace feature and an MCP tool (Copilot Studio, Anthropic, OpenAI agents)","Auditable citation and lineage trail on every output (dataset, timestamp, entitlement check)"]},
+ feeds:{n:"Data & Feeds",full:"Data & Feeds: Real-Time, Tick History, DataScope",div:"Data & Analytics",vs:["BBG","ICE","FDS"],vsTxt:"Bloomberg B-PIPE/Data License, ICE Data Services, FactSet feeds",rank:null,why:"Not separately ranked in §6.4. Its Data & Feeds Fabric is the shared real-time and entitlement platform that §6.1 says to fund once and consume across five products.",
+  intro:"The core distribution layer beneath Workspace: low-latency real-time data, historical tick data and reference/evaluated pricing, licensed straight into client infrastructure. [P:2,5]",
+  gap:[["Feed standardisation","Multiple products with separate Refinitiv-era entitlement models","Bloomberg B-PIPE + Data License via standard BLPAPI, deeply embedded"],["Owned low-latency source","Aggregates third-party and exchange data; LSE book is one contributor","ICE Data Services sells NYSE-sourced low-latency and evaluated pricing directly"],["API-native delivery","Feed-first, with integration effort on the client","FactSet ships feeds pre-wired into Workstation and workflow APIs"]],
+  playT:"From feed licensing to a queryable semantic data product",play:"Expose Real-Time, Tick History and DataScope through one federated query layer with PermID/FIGI identifiers and lineage, so a client or an AI agent asks once instead of stitching three licences together.",
+  H1:"Data & Feeds Fabric: one entitlement and identifier contract and one API surface across all three",H2:"GraphQL/semantic API joining market data with FTSE Russell membership and LCH margin in one call",H3:"Settlement-aware feed publishing cleared and DSD-settled positions alongside price",
+  ex:"A quant fund issues one query: 5-year tick history for FTSE 100 constituents joined with LCH RepoClear margin-call events on their bonds. Today this needs three licences and manual identifier reconciliation. On the Fabric it is one call with one entitlement check.",
+  cto:"A federated layer widens the blast radius of entitlement errors, so query-time authorisation is mandatory. Cross-border flows must respect DORA-jurisdiction residency, and upstream exchange redistribution monitoring must survive the new semantic layer.",
+  bp:["Cloud-native lakehouse (Azure Data Lake + Delta/Parquet-style layer) for streaming and history","Event-streaming backbone (Kafka/Event Hubs-class) with schema-registry contracts","Group-wide PermID/FIGI resolution: Data & Feeds, FTSE Russell and LCH share one identifier graph","Entitlement and redistribution controls enforced at the query layer"]},
+ ftse:{n:"FTSE Russell",full:"FTSE Russell: indices & benchmarks",div:"FTSE Russell",vs:["MSCI","SPG"],vsTxt:"MSCI, S&P Dow Jones Indices",rank:7,why:"Builds on the already-differentiated StepStone daily-valuation launch. It is mainly a Workspace-integration effort, not new data acquisition.",
+  intro:"Recent launches: FTSE StepStone Global Private Market Indices (Oct 2025), the FTSE Digital Asset Index Series, and a 21Shares benchmark partnership. [P:15,16,17]",
+  gap:[["Private-markets benchmarking","StepStone daily cash-adjusted and mark-to-market estimates address quarterly-NAV lag","MSCI's broader AI-enabled private-assets research and analytics sold to allocators"],["Thematic / AI indices","Rules-based; digital-asset indices new and narrow","S&P DJI thematic and AI-screened families backed by Kensho"],["Distribution into analytics","Indices licensed as data; not a named Workspace capability","MSCI embeds indices in Barra and AI Portfolio Insights"]],
+  playT:"From licensed feed to embedded analytics",play:"Grow the StepStone breakthrough into a full private-markets intelligence layer, and make benchmarks natively queryable in Workspace and via API/MCP, matching how MSCI fuses indices with analytics.",
+  H1:"Extend StepStone daily mark-to-market to private credit and infrastructure",H2:"Private Markets Copilot in Workspace: benchmark live portfolios daily, not quarterly",H3:"Digital Asset Index Series with real-time on-chain constituents via DMI and Payward rails",
+  ex:"A wealth manager asks how their private-equity allocation is doing against FTSE StepStone today, and how it correlates with the public-equity sleeve this week. The copilot joins daily StepStone valuations with FTSE All-World pricing via the shared identifier graph and answers the same day.",
+  cto:"UK/EU Benchmarks Regulation: AI-assisted methodology changes and automated rebalancing must keep auditability, conflict-of-interest controls and governance sign-off. Automation should speed up compliant processes without bypassing them.",
+  bp:["Real-time NAV/valuation ingestion from GP/LP administrators and StepStone, replacing quarterly batch","Index-as-code: version-controlled construction, API-triggered rebalancing, full methodology audit (IOSCO)","Integrate the classification and identifier graph with the Data & Feeds Fabric"]},
+ lse24:{n:"LSE / LSE 24",full:"London Stock Exchange: cash equities, ETPs & LSE 24",div:"Markets",vs:["NDAQ","ICE","DB"],vsTxt:"Nasdaq, NYSE/ICE, Deutsche Börse (Xetra)",rank:4,why:"A committed H1 2027 launch with client testing under way removes optionality. The architecture decision must be made now, not iterated after launch.",
+  intro:"LSE 24 launches with ETPs before equities: client testing in late 2026, launch in H1 2027 subject to approval. UK tokenised equity structures with Payward (Kraken) target 2027. [P:9,10]",
+  gap:[["Tokenised-equity first mover","Payward structures announced for 2027, not yet live","NYSE tokenised platform (Jan 2026) plus SEC innovation exemption (Sep 2026)"],["Continuous matching architecture","Client testing; resilience approach not publicly detailed","Nasdaq and CME: years of cloud-native, always-on hardening (AWS Outposts, private regions)"],["EU digital-securities integration","DSD/DiSH not yet integrated with LSE trading and settlement","Clearstream D7 issues and settles end-to-end; >75% cloud adoption"]],
+  playT:"LSE 24 as the forcing function",play:"Use LSE 24 to force a cloud-resilient, always-on trading architecture, and turn the Payward announcement into a live DSD-settled product before NYSE's exemption builds an irreversible liquidity lead.",
+  H1:"Active-active, multi-region matching for LSE 24 client testing, plus AI surveillance tuned for extended hours",H2:"Payward UK tokenised equities live on DSD-native settlement",H3:"LSE 24 extended to equities, bridging Asian and US time-zone liquidity",
+  ex:"An Asia-based desk trades a UK blue-chip ETP on LSE 24 during London's night, then converts part into Payward-distributed tokenised LSE equity settled via DSD in one continuous window, with AI surveillance watching the thin book for spoofing.",
+  cto:"Can surveillance and incident teams operate at full competence overnight? Can the 4-hour DORA incident clock be met at 3am? Does DSD-settled tokenised equity carry the same investor protection as CREST? Answer all three before scaling volume.",
+  bp:["Re-platform core matching onto active-active, multi-region infrastructure (cloud or cloud-adjacent)","AI surveillance calibrated for extended-hours conditions (wider spreads, thinner books)","DSD settlement rails integrated directly into trade confirmation and clearing","24-hour incident-response and client-support operating model"]},
+ tw:{n:"Tradeweb",full:"Tradeweb: rates, credit & ETF execution",div:"Markets",vs:["MKTX","BBG"],vsTxt:"MarketAxess, Bloomberg execution/BVAL",rank:2,why:"MarketAxess/AIQ has already shipped AI trade ideas. LSEG's differentiated all-in cost answer is a 12–18-month build, not a research project.",
+  intro:"Majority-owned by LSEG and integrating with Workspace in H1 2026. The CEO describes a 'flywheel' in which execution data strengthens FTSE Russell fixed-income indices, and expects more autonomous agents needing direct data access. [P:4]",
+  gap:[["AI trade ideas","No named AI trade-idea product; Workspace AI integration early","MarketAxess + AIQ Markets: AIQ Insight real-time trade ideas (2026)"],["Execution analytics in terminal","Workspace integration planned for H1 2026","Bloomberg BVAL and execution analytics fused with charting and risk"],["Cross-lifecycle data","Execution feeds indices; no productised link to LCH margin cost yet","No rival can match: MarketAxess and Bloomberg own no clearer"]],
+  playT:"Transaction cost + margin cost",play:"Close the AI execution-copilot gap, then leapfrog it by fusing Tradeweb execution with LCH margin/collateral cost and FTSE Russell data. A venue that doesn't clear the trade cannot replicate that signal.",
+  H1:"Tradeweb AI Execution Advisor in Workspace: protocol, counterparties and timing by predicted cost",H2:"Advisor adds real-time SwapClear/RepoClear margin impact for an all-in cost view",H3:"Governed autonomous-agent execution for low-touch flow under client risk limits",
+  ex:"A PM routes a $50m corporate bond order. The Advisor compares three protocols, estimates cost for each, adds projected SwapClear/RepoClear collateral impact for a swap hedge and recommends all-to-all with a specific counterparty set.",
+  cto:"MiFID II/UK best execution: recommendations must be explainable and evidenced. Fusing execution and clearing data needs explicit information-barrier design to protect LCH member confidentiality.",
+  bp:["TCA and liquidity models trained continuously on proprietary RFQ and all-to-all history","Low-latency governed API from Tradeweb pre-trade analytics to LCH margin services","Agent-execution API with hard guardrails: notional caps, allow-lists, kill-switch","Anonymised execution-quality data fed back into FTSE Russell fixed-income methodology"]},
+ lch:{n:"LCH",full:"LCH: SwapClear, RepoClear, ForexClear, EquityClear",div:"Markets (Post-Trade)",vs:["CME","DB","ICE"],vsTxt:"CME Clearing, Eurex Clearing, ICE Clear",rank:8,why:"Strategically important but dependent on DSD maturity. Sequence it after the shared real-time platform (§6.1) is in place.",
+  intro:"RepoClear SA clears over €1tn daily nominal across 12 European government-bond markets. The ECB joins as a Special Clearing Member in Q1 2026. [P:18]",
+  gap:[["Collateral tokenisation","GCPlus triparty; no real-time tokenised collateral","CME exploring collateral tokenisation via Google Cloud Universal Ledger"],["EU-domiciled swap clearing","SwapClear mainly UK; RepoClear SA is the EU entity","Eurex benefits from EU active-account requirements"],["Intraday margin transparency","Established CCP cycles; no self-serve simulation","ICE Clear and CME client-facing margin simulation tools"]],
+  playT:"Defend netting, lead collateral mobility",play:"Defend LCH's netting network effect while building real-time collateral mobility ahead of CME's nascent Universal Ledger work, and deepen EU capacity through RepoClear SA.",
+  H1:"Self-serve real-time margin and collateral simulator for members inside Workspace",H2:"DSD-integrated collateral mobility: re-pledge tokenised collateral across services intraday",H3:"Expand RepoClear SA and, subject to approval, EU-domiciled swap clearing",
+  ex:"Facing a mid-day SwapClear margin call, a member re-pledges DSD-tokenised gilts already posted at RepoClear and settles within minutes instead of waiting for the overnight triparty cycle.",
+  cto:"New real-time margining or tokenised collateral must pass CPMI-IOSCO PFMI stress testing before go-live. An intraday-margin outage could itself be a reportable, systemic DORA incident.",
+  bp:["Intraday, event-driven margin recalculation on the shared event-streaming backbone","DSD tokenised-asset registries integrated with the collateral-management engine","AI stress-testing and default-fund sizing that continuously ingest volatility and concentration data","EU-resident infrastructure for RepoClear SA and any expanded EU swap clearing"]},
+ pts:{n:"Post Trade · TradeAgent & DMI",full:"Post Trade Solutions / TradeAgent & DMI (DSD, DiSH, DMI, PSM)",div:"Markets (Post-Trade)",vs:["DB","NDAQ","ICE"],vsTxt:"Clearstream D7, DTCC, Nasdaq/NYSE tokenisation, HKEX Synapse",rank:6,rank2:9,why:"Consortium momentum (10+ banks live) is a rare coordination asset; extend scope before members build workarounds. Tokenised public-equity settlement (LSE/DMI) ranks #9: highest stakes and highest risk, so it is a funded H2/H3 option.",
+  intro:"TradeAgent (Mar 2026) centralises bilateral OTC derivatives post-trade for a consortium including Barclays, BNP Paribas, Citi and J.P. Morgan. DMI, DSD, DiSH and PSM form the tokenisation stack. [P:11,13,14]",
+  gap:[["Live tokenised issuance & settlement","DSD/DiSH in development, used selectively (PSM: Wayve, Moneybox)","Clearstream D7 issuing and settling end-to-end in production"],["Bilateral derivatives lifecycle","TradeAgent: an industry-first multi-bank consortium utility","No equivalent named rival; DTCC focuses on US cleared/cash"],["Tokenised public-market pathway","PISCES sandbox for private shares; public equities at announcement stage","NYSE/ICE SEC innovation exemption (Sep 2026)"]],
+  playT:"A converged post-trade fabric",play:"Make TradeAgent the shared system of record for the full bilateral-derivatives lifecycle, wired into DSD/DiSH so resets, compressions and novations trigger collateral and settlement automatically. D7's securities-only scope doesn't attempt this.",
+  H1:"Extend TradeAgent to lifecycle events (resets, amendments, compressions) on ISDA CDM",H2:"TradeAgent events trigger DSD collateral moves and LCH margin calls automatically",H3:"Extend PSM/DMI tokenisation toward public-market securities as the UK perimeter evolves",
+  ex:"Two banks agree a partial compression in TradeAgent. The CDM event triggers a DSD-settled collateral adjustment and updates each bank's SwapClear margin within minutes, replacing three systems and manual breaks.",
+  cto:"A multi-bank utility concentrates operational and cyber risk that no participant fully controls, so change control, incident response and exit rights need engineering-grade rigour. Automated settlement must be deterministic: an erroneous collateral move across 10+ banks is a systemic event.",
+  bp:["ISDA CDM as the canonical lifecycle model across the consortium [P:37]","Interoperability bridge from the TradeAgent event bus to the DSD tokenised ledger","Consortium governance as explicit, auditable smart-contract-style rules","T+1 (11 Oct 2027) as the forcing function to remove batch dependencies"]},
+ wc:{n:"Risk Intelligence",full:"Risk Intelligence: World-Check, sanctions & adverse media",div:"Risk Intelligence",vs:["NDAQ"],vsTxt:"Nasdaq Verafin, Moody's/BvD, Dow Jones R&C, LexisNexis",rank:3,why:"Verafin's agentic direction is public and scaling. LSEG already has the harder real-time foundation and should not cede the investigation layer on top of it.",
+  intro:"World-Check On Demand moved screening from batch to real-time, API-first (on AWS), with RegTech partners such as FinScan and RelyComply integrating it in 2025–26. [P:19,20]",
+  gap:[["Batch to real-time","Done: real-time, event-driven screening is live","Verafin moves the next step: agentic AI workforce after the hit"],["Ownership depth","Sanctions, PEP and adverse media; ownership depth not the core strength","Moody's / BvD Orbis beneficial-ownership depth"],["Case automation","Investigation and SAR narratives largely human-led","Verafin Entity Research Copilot automates documentation"]],
+  playT:"Investigate Agent + sovereign deployment",play:"Match Verafin's investigation automation while differentiating on breadth (sanctions, adverse media and the Sanctioned Securities Data File) and an air-gapped option for clients who cannot use shared cloud screening.",
+  H1:"World-Check Investigate Agent drafts case files (ownership, media timeline, securities exposure)",H2:"Beneficial-ownership depth to rival Orbis, through partnership or acquisition",H3:"Air-gapped, sovereign World-Check for government and critical national infrastructure",
+  ex:"A payments firm hits a sanctions match at onboarding. The agent assembles ownership chain, adverse-media timeline and securities exposure and drafts a narrative for a human analyst to sign off: minutes instead of hours, with a human keeping the final call.",
+  cto:"Case compilation must be access-logged and purpose-limited. False-positive and false-negative rates need independent validation and must be explainable. For SAR-style narratives, the human analyst stays the accountable decision-maker.",
+  bp:["Agent-orchestration layer chaining screening, entity resolution and adverse-media retrieval","Model distillation and air-gapped packaging, avoiding a parallel product line","Strict data minimisation and access logging on the Investigate Agent"]},
+ api:{n:"Analytics APIs & MCP",full:"Analytics APIs, Workspace SDK & MCP developer ecosystem",div:"Data & Analytics (horizontal)",vs:["BBG","FDS","SPG","NDAQ"],vsTxt:"Bloomberg BQL/Data License API, FactSet, S&P Capital IQ APIs, Nasdaq Data Link",rank:1,why:"First-mover advantage is real but time-limited. Competitors have no MCP equivalent yet, but that window narrows every quarter it is not extended into self-serve and certification.",
+  intro:"The first major data provider with a preconfigured MCP connector in Copilot Studio: ~90 MCP customers and 150+ connected or onboarding by Q1 2026. [P:3,6,7,8]",
+  gap:[["Agent-native distribution","MCP live in Copilot Studio with a model-agnostic strategy","Bloomberg BQL and Data License API: powerful but proprietary and terminal-centric"],["Self-serve onboarding","Enterprise-licensed and partner-mediated","Nasdaq Data Link: open, self-serve marketplace"],["Third-party tool certification","No public programme yet","No rival has one either, so the window is open to set the standard"]],
+  playT:"From first mover to open platform",play:"Push MCP leadership into a real open platform: a self-serve sandbox with usage billing and certification for third-party MCP tools. Beat Bloomberg's closed BQL and clear Nasdaq Data Link's onboarding bar.",
+  H1:"Public developer sandbox: free-tier delayed FTSE Russell and AI Search endpoints, self-serve keys",H2:"Usage-based billing plus an MCP tool-certification trust mark",H3:"Standard-setting position: LSEG's agent data-access pattern becomes the reference implementation",
+  ex:"A fintech signs up in minutes, gets a free key and builds an MCP portfolio-monitoring agent on delayed FTSE Russell data, with the Stripe/Twilio-style onboarding that Bloomberg's model is not structured to offer.",
+  cto:"Self-serve changes the threat model: API-key abuse, scraping and rate-limit evasion need enterprise-grade defence. Free-tier data (delayed, sampled or synthetic) must not cannibalise premium feeds.",
+  bp:["Metering and usage billing across API/MCP traffic, decoupled from enterprise licensing","Versioned, backward-compatible API/MCP contracts with a deprecation policy","Isolated, rate-limited sandbox with synthetic or delayed data","Certification test suite: data handling, citation and entitlement behaviour"]}
+};
+var PORDER=["api","tw","wc","lse24","ws","pts","ftse","lch","feeds"];
+var selHz="H1",selProd="api";
+function rankLabel(p){return p.rank?'<span class="rank"><b>#'+p.rank+'</b>priority</span>':'<span class="rank"><b>◆</b>platform</span>';}
+function drawGrid(){
+  $('pgrid').innerHTML=PORDER.map(function(id){var p=PR[id];return '<button class="pc" data-id="'+id+'" aria-pressed="'+(id===selProd)+'"><div class="top">'+rankLabel(p)+'<span class="hz '+selHz+'">'+selHz+'</span></div><h4>'+esc(p.n)+'</h4><div class="inno">'+C(esc(p[selHz]))+'</div><div class="vs">vs '+esc(p.vsTxt)+'</div></button>';}).join('');
+  Array.prototype.forEach.call($('pgrid').querySelectorAll('.pc'),function(b){b.onclick=function(){selProd=b.dataset.id;drawGrid();drawDetail();};});
+}
+function drawDetail(){
+  var p=PR[selProd];
+  var h='<div class="pd-head"><div style="display:grid;gap:6px"><div class="eyebrow">'+esc(p.div)+(p.rank?' · CTO priority #'+p.rank:' · Shared platform foundation')+'</div><h3 style="font-size:26px">'+esc(p.full)+'</h3><p class="small" style="max-width:75ch;color:var(--ink-2)">'+C(p.intro)+'</p></div><div class="chips">'+p.vs.map(logo).join('')+'</div></div>';
+  h+='<div class="scroll-x"><table class="gap-table"><thead><tr><th>Dimension</th><th>LSEG today</th><th>Rival killer move</th></tr></thead><tbody>'+p.gap.map(function(g){return '<tr><td><b>'+esc(g[0])+'</b></td><td class="ls-c">'+C(g[1])+'</td><td class="rv-c">'+C(g[2])+'</td></tr>';}).join('')+'</tbody></table></div>';
+  h+='<div style="display:grid;gap:10px"><div class="block-head"><h4 style="font-size:18px">Innovation play: '+esc(p.playT)+'</h4><span class="tag ana">Analysis</span></div><p class="small" style="max-width:85ch">'+C(p.play)+'</p><div class="hz-lane">'+['H1','H2','H3'].map(function(k,i){return '<div class="hz-card" style="box-shadow:inset 0 3px 0 var(--'+k.toLowerCase()+')"><div style="display:flex;gap:8px;align-items:center"><span class="hz '+k+'">'+k+'</span><span class="when">'+['0–18 months · defend the core','1–3 years · build the adjacency','3–5+ years · seed the option'][i]+'</span></div><div>'+C(esc(p[k]))+'</div></div>';}).join('')+'</div></div>';
+  h+='<div class="play"><div class="example"><div class="eyebrow">Concrete execution example</div><p>'+C(p.ex)+'</p></div><div class="ctolens"><div class="eyebrow">CTO lens · risk, privacy &amp; compliance</div><p>'+C(p.cto)+'</p></div></div>';
+  h+='<div class="block-head"><p class="small"><b>Why now:</b> '+C(p.why)+'</p><button class="chip" data-bp="'+selProd+'">Engineering blueprint <span class="arrow">↓</span></button></div>';
+  $('pdetail').innerHTML=h;
+  $('pdetail').querySelector('[data-bp]').onclick=function(){mxProd=selProd;mxCap=null;drawMx();drawBp();$('platform').scrollIntoView();setTimeout(function(){$('bp-panel').scrollIntoView({block:'start'});},10);};
+}
+Array.prototype.forEach.call($('hz-ctrl').querySelectorAll('button'),function(b){b.onclick=function(){selHz=b.dataset.h;Array.prototype.forEach.call($('hz-ctrl').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b);});drawGrid();};});
+function bindGo(root){Array.prototype.forEach.call(root.querySelectorAll('[data-go]'),function(b){b.onclick=function(){selProd=b.dataset.go;drawGrid();drawDetail();$('pdetail').scrollIntoView({block:'start'});};});}
+
+/* ---------- head-to-head ---------- */
+var H2H={
+ "Data & desktop":{cols:["LSEG product","Bloomberg","S&P Global","FactSet"],rows:[
+  ["Workspace (AI Search, Deep Research)","Terminal + AI Document Insights, ASKB agentic research","Capital IQ Pro + Kensho LLM-ready APIs","Workstation + AI-Powered Pitch Creator"],
+  ["Analytics APIs / Model-as-a-Service","Server API / B-PIPE","Kensho APIs, Market Intelligence APIs","APIs & Open:FactSet developer portal"],
+  ["Open AI-agent / MCP distribution","Closed: AI embedded inside Terminal only","Kensho centrally hosted; limited open multi-model reach","Partner content integrations; narrower than MCP"],
+  ["Pricing tier (core research package)","Premium, broadly comparable","Premium, broadly comparable","Premium, often positioned as lower-cost"]],
+  note:"Indicative pricing sits in a broadly comparable $22,000–$24,000/user/year band for core research packages. [S:51]"},
+ "Indices":{cols:["LSEG product","MSCI","S&P Dow Jones Indices"],rows:[
+  ["FTSE Russell flagship & custom indices","MSCI ACWI / regional & style, custom construction","S&P 500 / DJIA families, custom construction"],
+  ["FTSE StepStone private-market indices","MSCI Private Capital benchmarks with AI-native ingestion","Private-market initiatives, less AI-branded"],
+  ["FTSE Digital Asset Index Series","Exploration, less mature than FTSE Russell","S&P Kensho digital-asset thematic indices"],
+  ["ESG / transition indices (incl. Green Revenues)","MSCI ESG Ratings & Climate, a long-standing strength","S&P DJI ESG indices, Trucost integration"]],note:""},
+ "Venues":{cols:["LSEG product","Nasdaq","ICE / NYSE","CME Group","Deutsche Börse"],rows:[
+  ["LSE / LSE 24 (24/5, ETPs first)","23/5-toward-24/5 always-on roadmap","Planned 24/7 tokenised venue (Jan 2026)","Globex + Google Cloud ULL region","Xetra/Eurex, broad EU multi-asset access"],
+  ["Tradeweb: FX / fixed income","FX/fixed-income tech, less core","Fixed-income data & execution","Not comparable: derivatives-focused","360T FX platform"],
+  ["DMI / tokenised equities (xStocks, 2027)","Tokenised-equity approval (SEC, Mar 2026)","Tokenised-securities venue design","Tokenisation via Google Cloud Universal Ledger","D7 DLT platform (production, 2025)"]],note:""},
+ "Risk & post-trade":{cols:["LSEG product","CME Clearing","Eurex Clearing (DB)","Nasdaq Verafin"],rows:[
+  ["LCH (SwapClear, RepoClear, ForexClear)","Deep derivatives-only clearing","Eurex Clearing + Clearstream custody/settlement","Not comparable: AFC platform, not a CCP"],
+  ["Post Trade Solutions (11-bank consortium)","No comparable consortium disclosed","Clearstream's broader EU post-trade base","N/A"],
+  ["World-Check On Demand / Sanctioned Securities","N/A: not a compliance-data product","N/A: not a compliance-data product","Verafin AML/AFC platform + Entity Research Copilot"],
+  ["DSD / DiSH (custody & PvP/DvP)","N/A","D7 digital securities & settlement (more mature)","N/A"]],note:""}
+};
+var selH2H="Data & desktop";
+function drawH2H(){
+  $('h2h-ctrl').innerHTML=Object.keys(H2H).map(function(k){return '<button aria-pressed="'+(k===selH2H)+'">'+esc(k)+'</button>';}).join('');
+  Array.prototype.forEach.call($('h2h-ctrl').querySelectorAll('button'),function(b){b.onclick=function(){selH2H=b.textContent;drawH2H();};});
+  var t=H2H[selH2H];
+  $('h2h').innerHTML='<thead><tr>'+t.cols.map(function(c){return '<th>'+esc(c)+'</th>';}).join('')+'</tr></thead><tbody>'+t.rows.map(function(r){return '<tr>'+r.map(function(c,i){var na=i>0&&/^(N\/A|Not comparable)/.test(c);return '<td'+(na?' class="na"':'')+'>'+esc(c)+'</td>';}).join('')+'</tr>';}).join('')+'</tbody>';
+  $('h2h-note').innerHTML=C(t.note);
+}
+
+/* ---------- platform matrix ---------- */
+var MXP=["ws","feeds","ftse","lse24","tw","lch","pts","wc","api"];
+var MXS={ws:"Workspace",feeds:"Feeds",ftse:"FTSE R.",lse24:"LSE 24",tw:"Tradeweb",lch:"LCH",pts:"TradeAgent/DMI",wc:"World-Check",api:"APIs/MCP"};
+var CAPS=[
+ {L:"Experience & distribution"},
+ {id:"c1",n:"Agent-ready distribution: MCP tools, M365/Copilot surfaces, APIs",m:{ws:2,feeds:2,ftse:2,api:2,wc:1}},
+ {id:"c2",n:"Metering & usage-based billing",m:{api:2,ws:1}},
+ {L:"AI & agents"},
+ {id:"c3",n:"Agent orchestration (research, execution, investigation)",m:{ws:2,tw:2,wc:2,ftse:1}},
+ {id:"c4",n:"Shared model governance: citations, lineage, human-in-the-loop, model-risk sign-off",m:{ws:2,tw:1,wc:1,lse24:1,ftse:1}},
+ {id:"c5",n:"Predictive & surveillance ML on proprietary flow",m:{tw:2,lch:2,lse24:2}},
+ {L:"Data"},
+ {id:"c6",n:"Semantic data graph & shared PermID/FIGI identifiers",m:{ws:2,feeds:2,ftse:2,lch:1}},
+ {id:"c7",n:"Entitlement-aware query & retrieval, redistribution controls",m:{ws:2,feeds:2,api:1,wc:2}},
+ {id:"c8",n:"Cloud lakehouse for tick & reference data",m:{feeds:2}},
+ {L:"Real-time backbone"},
+ {id:"c9",n:"Event-streaming backbone (batch → real-time, schema registry)",m:{feeds:2,ftse:2,lch:2,pts:2,lse24:1,wc:2}},
+ {id:"c10",n:"Standard contracts: ISDA CDM, versioned API/MCP, index-as-code",m:{pts:2,api:2,ftse:2}},
+ {L:"Market infrastructure"},
+ {id:"c11",n:"Active-active, multi-region continuous operations",m:{lse24:2,lch:1}},
+ {id:"c12",n:"Tokenised settlement integration (DSD / DiSH ledger)",m:{lse24:2,lch:2,pts:2,feeds:1,ftse:1}},
+ {id:"c13",n:"Governed agent-execution API (risk limits, kill-switch, agent identity)",m:{tw:2,lse24:1}},
+ {L:"Cloud, security & resilience"},
+ {id:"c14",n:"Sovereign / air-gapped & in-region deployment",m:{wc:2,ws:1}},
+ {id:"c15",n:"Post-quantum cryptography roadmap (FIPS 203/204/205)",m:{pts:1,lch:1}},
+ {id:"c16",n:"DORA third-party register, multi-cloud/model portability, exit testing",m:{api:1,tw:1,ws:1,feeds:1,ftse:1,lse24:1,lch:1,pts:1,wc:1}}
+];
+var mxProd="ws",mxCap=null;
+function drawMx(){
+  var h='<thead><tr><th style="text-align:left;cursor:default">Capability</th>'+MXP.map(function(p){return '<th scope="col" data-p="'+p+'" class="'+(p===mxProd?'sel':'')+'" tabindex="0">'+esc(MXS[p])+'</th>';}).join('')+'</tr></thead><tbody>';
+  CAPS.forEach(function(c){
+    if(c.L){h+='<tr><th class="layer" colspan="'+(MXP.length+1)+'">'+esc(c.L)+'</th></tr>';return;}
+    var rowSel=mxCap===c.id,rowDim=(mxCap&&!rowSel)||(mxProd&&!mxCap&&!c.m[mxProd]);
+    h+='<tr class="'+(rowSel?'sel ':'')+(rowDim?'dim':'')+'"><td class="cap" data-c="'+c.id+'" tabindex="0">'+esc(c.n)+'</td>'+MXP.map(function(p){var v=c.m[p]||0;var dimc=(!rowDim&&mxProd&&!mxCap&&p!==mxProd)||(mxCap&&rowSel&&!v);return '<td class="dot'+(dimc?' dimc':'')+'">'+(v?'<span class="d'+v+'" title="'+(v===2?'Named blueprint element':'Dependency / guardrail')+'"></span>':'')+'</td>';}).join('')+'</tr>';
+  });
+  $('mx').innerHTML=h+'</tbody>';
+  Array.prototype.forEach.call($('mx').querySelectorAll('th[data-p]'),function(th){th.onclick=th.onkeydown=function(e){if(e.type==='keydown'&&e.key!=='Enter')return;mxProd=th.dataset.p;mxCap=null;drawMx();drawBp();};});
+  Array.prototype.forEach.call($('mx').querySelectorAll('td[data-c]'),function(td){td.onclick=td.onkeydown=function(e){if(e.type==='keydown'&&e.key!=='Enter')return;mxCap=mxCap===td.dataset.c?null:td.dataset.c;drawMx();drawBp();};});
+  $('mx-reset').hidden=!mxCap;
+}
+$('mx-clear').onclick=function(){mxCap=null;drawMx();drawBp();};
+function drawBp(){
+  if(mxCap){
+    var c=CAPS.filter(function(x){return x.id===mxCap;})[0];
+    var ps=MXP.filter(function(p){return c.m[p];});
+    $('bp-panel').innerHTML='<div class="pd-head"><div style="display:grid;gap:6px"><div class="eyebrow">Shared capability · reused by '+ps.length+' of 9 products</div><h3 style="font-size:24px">'+esc(c.n)+'</h3></div></div><div class="chips">'+ps.map(function(p){return '<button class="chip" data-mp="'+p+'">'+(c.m[p]===2?'● ':'○ ')+esc(PR[p].n)+' <span class="arrow">→</span></button>';}).join('')+'</div><p class="small muted">Funding this once and consuming it across these products is the platform economics behind Pattern 1 and Pattern 3. Select a product to see its full blueprint.</p>';
+    Array.prototype.forEach.call($('bp-panel').querySelectorAll('[data-mp]'),function(b){b.onclick=function(){mxProd=b.dataset.mp;mxCap=null;drawMx();drawBp();};});
+    return;
+  }
+  var p=PR[mxProd];
+  var caps=CAPS.filter(function(c){return c.id&&c.m[mxProd];});
+  $('bp-panel').innerHTML='<div class="pd-head"><div style="display:grid;gap:6px"><div class="eyebrow">Technology transformation blueprint · '+esc(p.div)+'</div><h3 style="font-size:24px">'+esc(p.full)+'</h3></div><div class="chips">'+['H1','H2','H3'].map(function(k){return '<span class="hz '+k+'">'+k+'</span>';}).join('')+'</div></div>'+
+  '<div class="bp"><div style="display:grid;gap:10px;align-content:start"><div class="eyebrow">Architecture changes required</div><ol>'+p.bp.map(function(b){return '<li>'+C(b)+'</li>';}).join('')+'</ol></div>'+
+  '<div style="display:grid;gap:14px;align-content:start"><div class="eyebrow">Platform capabilities consumed</div><div class="capcloud">'+caps.map(function(c){return '<span class="'+(c.m[mxProd]===2?'p':'')+'">'+esc(c.n)+'</span>';}).join('')+'</div>'+
+  '<div class="eyebrow">Business objective it realises</div><p class="small">'+C(esc(p.playT)+'. '+p.why)+'</p>'+
+  '<div class="ctolens"><div class="eyebrow">Non-negotiable controls</div><p>'+C(p.cto)+'</p></div></div></div>';
+}
+
+/* ---------- segment blueprints ---------- */
+function drawSegBp(){
+  $('segbp').innerHTML=SEG.map(function(s,i){return '<details class="acc"'+(i<2?' open':'')+'><summary>'+esc(s.n)+'</summary><div class="in"><div><div class="eyebrow" style="margin-bottom:6px">Architecture</div><ul class="clean">'+s.bp.map(function(b){return '<li>'+C(b)+'</li>';}).join('')+'</ul></div><div><div class="eyebrow" style="margin-bottom:6px">Near-term deliverables</div><ul class="clean">'+s.ex.map(function(b){return '<li>'+C(b)+'</li>';}).join('')+'</ul></div></div></details>';}).join('');
+}
+
+/* ---------- guardrails ---------- */
+var GUARD=[
+ {s:"c",t:"DORA & CTPP concentration",b:"Microsoft, AWS and Google Cloud are designated CTPPs. LSEG must keep a tested cloud exit strategy and an xBRL-CSV Register of Information, and meet 4-hour reporting and TIBER-EU TLPT. Log every new cloud dependency at design time and validate portability for priority-1/2 products. [S:42,43] [P:35]",a:["All products","Azure","AWS"]},
+ {s:"c",t:"AI governance & model risk",b:"One shared framework for the Research Agent, Execution Advisor and Investigate Agent: approved-model registry, grounded-response measurement, confidence thresholds, deterministic pre-trade checks and immutable audit. A probabilistic output never silently becomes a pricing or trading decision. Map to the EU AI Act.",a:["Workspace","Tradeweb","World-Check","LSE 24"]},
+ {s:"w",t:"Post-quantum cryptography",b:"'Harvest now, decrypt later' threatens long-lived settlement and trading data. Sequence: inventory, then hybrid classical/PQC, then the highest-sensitivity systems (LCH networks, real-time feeds), with no big-bang cutover. Build it into DSD/DiSH/TradeAgent now. [S:44] [P:36]",a:["LCH","DSD/DiSH","TradeAgent","Feeds"]},
+ {s:"w",t:"Data privacy & residency",b:"World-Check processes sensitive PEP and adverse-media data across regimes, so the sovereign-agent play is partly a privacy response. Cross-lifecycle fusion concentrates data: apply purpose limitation, access logging and minimisation at the point of aggregation. Design selective disclosure into DLT flows.",a:["World-Check","DMI/DSD","Feeds"]},
+ {s:"w",t:"Market conduct & best execution",b:"The Execution Advisor sits inside MiFID II/UK best-execution rules and must be explainable and evidenced. LSE 24 surveillance must be validated for thin overnight liquidity, not reuse daytime thresholds.",a:["Tradeweb","LSE 24"]},
+ {s:"w",t:"Benchmark regulation & conflicts",b:"LSEG both administers indices and runs the trading, clearing and data businesses that feed them. AI-assisted methodology changes need the same UK/EU BMR governance sign-off as manual ones.",a:["FTSE Russell","Tradeweb"]}
+];
+$('guard').innerHTML=GUARD.map(function(g){return '<div class="gcard'+(g.s==='w'?' w':'')+'"><span class="sev '+g.s+'">'+(g.s==='c'?'▲ Critical':'■ Elevated')+'</span><h4>'+esc(g.t)+'</h4><p>'+C(g.b)+'</p><div class="affects">'+g.a.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div></div>';}).join('');
+
+/* ---------- KPIs ---------- */
+var KPI=[
+ ["Overall growth","Organic CC +8.4% (H1 2026); FY2026 guidance 7.0–7.5%","Growth attributable to AI/API/digital-market initiatives"],
+ ["Subscription health","ASV +6.1%; retention 92.8%; gross sales £482m","ASV by AI-enabled line; net retention; displacement wins vs Bloomberg/FactSet"],
+ ["Innovation commercialisation","NPVI 25.0%","Sustain NPVI and track margin and retention of new products"],
+ ["AI adoption",">200 enterprise engagements; ~17k AI Search; ~7k Deep Research","MAU, AI workflows per customer, MCP/API usage, paid conversion, AI-attributable ARR"],
+ ["AI-ready data & MCP","~90 MCP customers; 150+ onboarding (Q1 2026)","% strategic datasets with semantic metadata, lineage, machine entitlements; onboarding lead time"],
+ ["LSE 24 market quality","Client testing end-2026; ETPs H1 2027","Off-hours ADV, spreads, depth, participants, incident rate vs Nasdaq/Cboe/ICE"],
+ ["Digital securities","DSD/DiSH in development; DMI live with Apex","Assets issued/serviced, participants, settlement value, DvP/PvP counts"],
+ ["Post-trade (T+1)","EU/UK/CH T+1 deadline 11 Oct 2027","Same-day affirmation, STP rate, exception ageing, fails rate"],
+ ["Resilience / DORA","Microsoft designated CTPP (Nov 2025)","Tested RTO/RPO, failover success, cloud/model concentration index, severe incidents"],
+ ["Margin & capital","Adj. EBITDA 52.7% (+320bps); capex ~9.5% FY2026","~150bps cumulative margin gain 2027–29; capex toward ~8% by 2029"]
+];
+$('kpi').innerHTML='<thead><tr><th>Strategic layer</th><th>Latest disclosed baseline</th><th>3-year KPI emphasis (to ~2029)</th></tr></thead><tbody>'+KPI.map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>';}).join('')+'</tbody>';
+
+/* ---------- roadmap ---------- */
+var PH=[
+ ["2022–25","Foundation","Delivered","done","Microsoft partnership (2022); Azure/data migration; Workspace integration; AI-ready data foundation."],
+ ["2025–26","Execution under way","In progress","prog now","LSEG Everywhere; MCP live; AI Search/Deep Research scaling; DSD & DiSH in development; PSM (Wayve, Moneybox); TradeAgent."],
+ ["Late 26–27","Announced / planned","Committed","comm","LSE 24 client testing (end-2026), ETP launch H1 2027; Payward/xStocks 2027; T+1 on 11 Oct 2027."],
+ ["2027–29","Industrialise & scale","Recommended","rec","Industrialise AI monetisation; connect DSD + DiSH + LSE 24; broaden T+1 automation; standardise agent identity; active-active resilience."],
+ ["2029–31","Converge & monetise","Extrapolation","ext","AI-native, increasingly continuous multi-asset platform; shared post-trade rails for digital and conventional assets."]
+];
+$('phases').innerHTML=PH.map(function(p){return '<div class="phase '+p[3]+'"><span class="st">'+p[2]+(p[3].indexOf('now')>=0?' · we are here':'')+'</span><span class="yr">'+p[0]+'</span><b style="color:var(--ink);font-size:13px">'+p[1]+'</b><span>'+p[4]+'</span></div>';}).join('');
+var RM={H1:[["ws","Research Agent (pitch/comp automation)"],["tw","AI Execution Advisor v1 (cost-only)"],["lse24","Active-active matching + extended-hours surveillance"],["wc","Investigate Agent v1"],["feeds","Data & Feeds Fabric (entitlements + identifiers)"],["api","Developer sandbox, self-serve keys"],["pts","TradeAgent lifecycle events on CDM"]],
+ H2:[["tw","Advisor v2 with LCH margin-cost fusion"],["ftse","Private Markets Copilot in Workspace"],["lch","Real-time collateral mobility via DSD"],["pts","TradeAgent → DSD/LCH settlement bridge"],["api","MCP certification + usage billing"],["wc","Beneficial-ownership depth"],["lse24","Payward tokenised equities on DSD"]],
+ H3:[["ws","Cross-institution compliance Teams channel"],["ftse","On-chain real-time digital-asset indices"],["wc","Sovereign / air-gapped World-Check"],["lse24","LSE 24 equities + cross-time-zone"],["pts","PSM/DMI toward public-market tokenisation"]]};
+var rmSel=null;
+function drawRm(){
+  $('rm-filter').innerHTML='<button class="chip" data-r="" aria-pressed="'+(!rmSel)+'">All</button>'+MXP.map(function(p){return '<button class="chip" data-r="'+p+'" style="'+(rmSel===p?'border-color:var(--accent);color:var(--accent)':'')+'">'+esc(MXS[p])+'</button>';}).join('');
+  Array.prototype.forEach.call($('rm-filter').querySelectorAll('button'),function(b){b.onclick=function(){rmSel=b.dataset.r||null;drawRm();};});
+  var lbl={H1:["0–18 months","Defend the core"],H2:["1–3 years","Build the adjacency"],H3:["3–5+ years","Seed the option"]};
+  $('lanes').innerHTML=['H1','H2','H3'].map(function(k){return '<div class="lane" style="box-shadow:inset 4px 0 0 var(--'+k.toLowerCase()+')"><div class="lh"><span class="hz '+k+'" style="justify-self:start">'+k+'</span><b>'+lbl[k][1]+'</b><span class="small muted">'+lbl[k][0]+'</span></div><div class="items">'+RM[k].map(function(it){return '<div class="ri'+(rmSel&&rmSel!==it[0]?' fade':'')+'"><small>'+esc(MXS[it[0]])+'</small>'+esc(it[1])+'</div>';}).join('')+'</div></div>';}).join('');
+}
+var PRIO=["<b>Trusted data & AI-distribution layer.</b> Convert LSEG Everywhere/MCP engagement into paid, production consumption, tracked by AI-attributable ARR rather than partner logos.","<b>Resilience-grade cloud & platform engineering.</b> Fund a standing multi-cloud/model portability and exit-testing programme.","<b>Real-time, always-on market architecture.</b> LSE 24 forces continuous data, surveillance, risk, support and settlement.","<b>Converged digital securities & programmable settlement.</b> DSD and DiSH as shared infrastructure, not isolated pilots.","<b>Real-time post-trade automation.</b> T+1 (Oct 2027) as the forcing function to remove batch across LCH and TradeAgent.","<b>API-first Risk Intelligence with sovereign deployment.</b> Real-time, embeddable and, where required, air-gapped decision services.","<b>Unified experience across Workspace, M365, clouds and third-party agents.</b> Consistent identity, permissions, semantics and citations."];
+$('prio').innerHTML=PRIO.map(function(p){return '<li>'+p+'</li>';}).join('');
+
+/* ---------- references ---------- */
+var RS=[
+"LSEG Annual Report 2025|lseg.com/en/investor-relations/annual-reports/2025",
+"London Stock Exchange Group plc: H1 2026 Interim Results (30 Jul 2026)|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-group-plc-h1-2026-interim-results",
+"LSEG 2025 Preliminary Results (26 Feb 2026)|lseg.com/en/investor-relations/financial-results/2025-preliminary-results",
+"London Stock Exchange Group plc: Q1 2026 Trading Update (23 Apr 2026)|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-group-plc-q1-2026-trading-update",
+"LSEG AI / “LSEG Everywhere” solutions overview|lseg.com/en/solutions/ai-finance-solutions",
+"LSEG's Strategic Partnership with Microsoft|lseg.com/en/microsoft-partnership",
+"LSEG and Microsoft launch 10-year strategic partnership (2022)|lseg.com/en/media-centre/press-releases/2022/lseg-and-microsoft-launch-strategic-partnership",
+"From interoperability to agents: Powering financial workflows with AI|lseg.com/en/insights/from-interoperability-to-agents-powering-financial-workflows-with-ai",
+"LSEG and Microsoft transform access to AI-ready financial data in customer workflows (Oct 2025)|news.microsoft.com/source/2025/10/12/lseg-and-microsoft-transform-access-to-ai-ready-financial-data-in-customer-workflows/",
+"London Stock Exchange to launch LSE 24|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24",
+"London Stock Exchange to launch UK tokenised equity structures and partnership with Payward (2026)|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-launches-uk-tokenised-equity-structures-and-announces-partnership-with-payward",
+"LSEG Digital Markets Infrastructure: how tokenisation can unlock the next phase of private markets growth|lseg.com/en/solutions/digital-markets-infrastructure/how-tokenisation-can-unlock-the-next-phase-of-private-markets-growth",
+"LSEG rolls out blockchain-based platform for private funds (Reuters, 15 Sep 2025)|reuters.com/world/uk/lseg-rolls-outs-blockchain-based-platform-private-funds-2025-09-15/",
+"LSEG Data & Analytics Product Strategy and Monetisation, LSEG Innovation Forum (Nov 2025)|lseg.com (Innovation Forum investor materials)",
+"LSEG Launches World-Check On Demand|lseg.com (press release)",
+"LSEG Sustainability Report 2025|lseg.com/content/dam/lseg/en_us/documents/reports/lseg-sustainability-report.pdf",
+"Bloomberg Accelerates Financial Analysis with Gen AI Document Insights|bloomberg.com/company/press/bloomberg-accelerates-financial-analysis-with-gen-ai-document-insights/",
+"Streamline efficiency with the Bloomberg Terminal: 350,000+ user community|bloomberg.com (company product materials)",
+"Kensho: S&P Global's Hub for AI Innovation and Transformation|investorfactbook.spglobal.com/sp-global/kensho-sp-globals-hub-for-ai-innovation-and-transformation/",
+"S&P Global Makes $550 Million Bet on AI with Kensho Buy (WatersTechnology, 2018); CEO's Letter, 2024 Annual Report (>$1bn cumulative AI investment)|waterstechnology.com/organization-management/alliances-mergers-acquisitions/3529321/sp-global-makes-550-million-bet-on-ai-with-kensho-buy",
+"S&P Global Annual Report 2025|spglobal.com/en/annual-reports/2025",
+"Nasdaq Verafin Announces Launch of its Agentic AI Workforce|ir.nasdaq.com/news-releases/news-release-details/nasdaq-verafin-announces-launch-its-agentic-ai-workforce",
+"Verafin Enhances Financial Crime Management Solutions Suite with Launch of Entity Research Copilot|nasdaq.com/press-release/verafin-enhances-financial-crime-management-solutions-suite-with-launch-of-entity",
+"Nasdaq, Inc. Q2 2026 earnings release / SEC filings|sec.gov/Archives/edgar/data/1120193/",
+"MSCI AI Portfolio Insights|msci.com/data-and-analytics/risk-management-solutions/ai-portfolio-insights",
+"MSCI: Private Assets and AI-Enabled Innovation, Investor materials (25 Jun 2026)|ir.msci.com/static-files/32e6f036-18c0-46ad-8a72-45ffb20c2515",
+"MSCI State of Private Markets 2026|msci.com/research-and-insights/paper/the-state-of-private-markets-2026",
+"FactSet Launches AI-Powered Pitch Creator (15 Jan 2025)|investor.factset.com/news-releases/news-release-details/factset-launches-ai-powered-pitch-creator",
+"FactSet 2025 Annual Report|investor.factset.com/static-files/50cb77f8-83b8-4d1d-8c61-cce0af84a86b",
+"Deutsche Börse Group and Google Cloud Announce Strategic Partnership|deutsche-boerse.com/dbg-en/media/news-stories/press-releases/Deutsche-B-rse-Group-and-Google-Cloud-Announce-Strategic-Partnership-to-Accelerate-Innovation-3405724",
+"Deutsche Börse celebrates important milestone in cloud adoption (>75%)|deutsche-boerse.com/dbg-en/media/news-stories/news-stories-insights/insights-innovation-new-technologies-en/Deutsche-B-rse-celebrates-important-milestone-in-cloud-adoption-4221044",
+"Clearstream: Digital Issuance / D7 platform overview|clearstream.com/clearstream-en/securities-services/issuance-solutions/digital-issuance",
+"D7 DLT: Clearstream Launches Tokenized Securities Platform (Nov 2025)|clearstream.com/clearstream-en/newsroom/251104-4757900",
+"CME Group Signs 10-Year Partnership with Google Cloud (2021)|streetinsider.com / PR Newswire, CME Group press materials",
+"CME Group and Google Cloud announce new Chicago-area private cloud region (Jun 2024)|cmegroup.com/media-room/press-releases/2024/6/26/cme_group_and_googlecloudannouncenewchicagoareaprivatecloudregio.html",
+"CME Group Will Introduce Tokenization Technology Using Google Cloud's Universal Ledger (Mar 2025)|cmegroup.com/media-room/press-releases/2025/3/25/cme_group_will_introducetokenizationtechnologytoenhancecapitalma.html",
+"ICE 2025 Letter to Shareholders|ir.theice.com/financials/annual-reports-and-proxy/2025-Letter-to-Shareholders/default.aspx",
+"Intercontinental Exchange Reports Strong Full Year 2025 Results|ir.theice.com/press/news-details/2026/Intercontinental-Exchange-Reports-Strong-Full-Year-2025-Results/default.aspx",
+"The New York Stock Exchange Develops Tokenized Securities Platform (Jan 2026)|ir.theice.com/press/news-details/2026/The-New-York-Stock-Exchange-Develops-Tokenized-Securities-Platform/default.aspx",
+"Nasdaq Raises Medium-Term Revenue Outlook: 2026 Investor Day|nasdaq.com/press-release/nasdaq-raises-medium-term-revenue-outlook-and-outlines-strategy-its-next-phase",
+"Modernizing trading workloads with next-generation AWS Outposts|aws.amazon.com/blogs/industries/modernizing-trading-workloads-with-next-generation-aws-outposts-racks/",
+"EIOPA: Digital Operational Resilience Act (DORA) overview|eiopa.europa.eu/digital-operational-resilience-act-dora_en",
+"Full List of 19 Designated Critical Third-Party Providers (Oct 2025)|regulation-dora.eu/blog/critical-ict-third-party-designations-october-2025",
+"NIST: Post-Quantum Cryptography Project|csrc.nist.gov/projects/post-quantum-cryptography",
+"BIS: Project Agorá|bis.org/project/agora",
+"ECB opens blockchain link to financial markets: Pontes (Reuters, 21 Sep 2026)|reuters.com/business/finance/ecb-opens-blockchain-link-financial-markets-2026-09-21/",
+"SEC: Notice of Filing, SR-Nasdaq-2025-072 (tokenised securities trading rule)|sec.gov/rules-regulations/self-regulatory-organization-rulemaking/sr-nasdaq-2025-072",
+"SEC issues innovation exemption for tokenized NMS stock (17 Sep 2026)|sec.gov/newsroom/press-releases/2026-90-sec-issues-innovation-exemption-facilitate-trading-tokenized-nms-stock-request-comment",
+"Euronext: Innovate for Growth 2027|euronext.com/en/innovate-for-growth-2027",
+"HKEX 2026 Interim Presentation|hkexgroup.com/Investor-Relations/Financial-Results-and-Presentations/2026/Interim/2026-Interim-Presentation",
+"Refinitiv vs Bloomberg vs FactSet vs Capital IQ: pricing/positioning comparison|ctacquisitions.com/refinitiv-vs-bloomberg-vs-factset-vs-capital-iq/",
+"LSEG Strategy and Business Model overview|umbrex.com/resources/company-profiles/london-stock-exchange-group-plc/"
+];
+var RP=[
+"London Stock Exchange Group plc: H1 2026 Interim Results (30 Jul 2026)|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-group-plc-h1-2026-interim-results",
+"LSEG Annual Report 2025|lseg.com/en/investor-relations/annual-reports/2025",
+"London Stock Exchange Group plc: Q1 2026 Trading Update (23 Apr 2026)|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-group-plc-q1-2026-trading-update",
+"ANALYSIS: LSEG looks to Tradeweb to power 'critical' fixed income expansion (FOW)|fow.com/insights/analysis-lseg-looks-to-tradeweb-to-power-critical-fixed-income-expansion",
+"LSEG Data & Analytics Product Strategy and Monetisation, LSEG Innovation Forum (Nov 2025)|lseg.com (Innovation Forum investor materials)",
+"LSEG AI / “LSEG Everywhere” solutions overview|lseg.com/en/solutions/ai-finance-solutions",
+"LSEG's Strategic Partnership with Microsoft|lseg.com/en/microsoft-partnership",
+"LSEG and Microsoft transform access to AI-ready financial data in customer workflows (Oct 2025)|news.microsoft.com/source/2025/10/12/lseg-and-microsoft-transform-access-to-ai-ready-financial-data-in-customer-workflows/",
+"London Stock Exchange to launch LSE 24|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-to-launch-lse-24",
+"London Stock Exchange to launch UK tokenised equity structures and partnership with Payward (2026)|lseg.com/en/media-centre/press-releases/2026/london-stock-exchange-launches-uk-tokenised-equity-structures-and-announces-partnership-with-payward",
+"LSEG Digital Markets Infrastructure: how tokenisation can unlock the next phase of private markets growth|lseg.com/en/solutions/digital-markets-infrastructure/how-tokenisation-can-unlock-the-next-phase-of-private-markets-growth",
+"LSEG rolls out blockchain-based platform for private funds (Reuters, 15 Sep 2025)|reuters.com/world/uk/lseg-rolls-outs-blockchain-based-platform-private-funds-2025-09-15/",
+"LSEG announces partnership and investment in Post Trade Solutions (23 Oct 2025)|lseg.com/en/media-centre/press-releases/2025/lseg-announces-partnership-and-investment-in-post-trade-solutions",
+"LSEG Post Trade Solutions Launches TradeAgent (Mar 2026), A-Team Insight|a-teaminsight.com/blog/lseg-launches-tradeagent-to-centralise-bilateral-otc-derivatives-post-trade-processing/",
+"FTSE Russell and StepStone Launch Private Market Indices (30 Oct 2025)|lseg.com/en/media-centre/press-releases/ftse-russell/2025/ftse-russell-stepstone-launch-private-market-indices",
+"FTSE Digital Asset Index Series|lseg.com/en/ftse-russell/indices/digital-asset",
+"FTSE Russell US Wealth Survey (May 2026)|lseg.com/en/media-centre/press-releases/ftse-russell/2026/ftse-russell-us-wealth-survey-may-2026",
+"The European Central Bank Joins LCH RepoClear SA (6 Nov 2025)|lseg.com/en/media-centre/press-releases/lch/2025/the-european-central-bank-joins-lch-repoclear-sa",
+"From Batch to Real-Time: LSEG Reinvents AML Screening with World-Check On Demand (A-Team Insight)|a-teaminsight.com/blog/from-batch-to-real-time-lseg-reinvents-aml-screening-with-world-check-on-demand/",
+"RelyComply integrates LSEG World-Check On Demand for real-time financial crime risk management (27 Aug 2026)|fintech.global/2026/08/27/relycomply-integrates-lseg-world-check-on-demand-for-real-time-financial-crime-risk-management/",
+"Bloomberg Accelerates Financial Analysis with Gen AI Document Insights|bloomberg.com/company/press/bloomberg-accelerates-financial-analysis-with-gen-ai-document-insights/",
+"Data License and API Library: Bloomberg Professional Services (BQL/BLPAPI)|bloomberg.com/professional/products/data/data-management/data-license/",
+"FactSet Launches AI-Powered Pitch Creator (15 Jan 2025)|investor.factset.com/news-releases/news-release-details/factset-launches-ai-powered-pitch-creator",
+"Kensho: S&P Global's Hub for AI Innovation and Transformation|investorfactbook.spglobal.com/sp-global/kensho-sp-globals-hub-for-ai-innovation-and-transformation/",
+"S&P Global Makes $550 Million Bet on AI with Kensho Buy; S&P Global Annual Report 2025 (>$1bn cumulative AI investment)|waterstechnology.com/organization-management/alliances-mergers-acquisitions/3529321/sp-global-makes-550-million-bet-on-ai-with-kensho-buy",
+"MSCI AI Portfolio Insights|msci.com/data-and-analytics/risk-management-solutions/ai-portfolio-insights",
+"MSCI State of Private Markets 2026; Private Assets and AI-Enabled Innovation investor materials (25 Jun 2026)|msci.com/research-and-insights/paper/the-state-of-private-markets-2026",
+"Nasdaq Verafin Announces Launch of its Agentic AI Workforce|ir.nasdaq.com/news-releases/news-release-details/nasdaq-verafin-announces-launch-its-agentic-ai-workforce",
+"Verafin Enhances Financial Crime Management Solutions Suite with Launch of Entity Research Copilot|nasdaq.com/press-release/verafin-enhances-financial-crime-management-solutions-suite-with-launch-of-entity",
+"AIQ Markets and MarketAxess Partner to Launch AIQ Insight for Fixed-Income Traders (2026)|a-teaminsight.com/briefs/aiq-markets-and-marketaxess-partner-to-launch-aiq-insight-for-fixed-income-traders/",
+"CME Group Signs 10-Year Partnership with Google Cloud (2021); CME Group Will Introduce Tokenization Technology Using Google Cloud's Universal Ledger (Mar 2025)|cmegroup.com/media-room/press-releases/2025/3/25/cme_group_will_introducetokenizationtechnologytoenhancecapitalma.html",
+"Clearstream D7: Digital Issuance / Tokenized Securities Platform (Nov 2025); Deutsche Börse cloud-adoption milestone (>75%)|clearstream.com/clearstream-en/newsroom/251104-4757900",
+"The New York Stock Exchange Develops Tokenized Securities Platform (Jan 2026); SEC innovation exemption for tokenized NMS stock (17 Sep 2026)|ir.theice.com/press/news-details/2026/The-New-York-Stock-Exchange-Develops-Tokenized-Securities-Platform/default.aspx",
+"EurexOTC Clear: Release documentation and clearing circulars (2026)|eurex.com/ec-en/clear/eurex-otc-clear/about-eurex-otc-clear",
+"Full List of 19 Designated Critical Third-Party Providers (Oct 2025); EIOPA DORA overview|regulation-dora.eu/blog/critical-ict-third-party-designations-october-2025",
+"NIST: Post-Quantum Cryptography Project|csrc.nist.gov/projects/post-quantum-cryptography",
+"ISDA: Common Domain Model (CDM) overview|isda.org/isda-common-domain-model/",
+"LSEG Innovation Strategy and Competitive Position 2026–2030 (internal project research base)|project document: LSEG claude.ai Project",
+"LSEG Business Technology Transformation and Innovation Strategy: Three-to-Five-Year Market Outlook (internal project research base)|project document: LSEG claude.ai Project"
+];
+function rtype(u){
+  if(/^lseg\.com/.test(u))return "LSEG";
+  if(/eiopa|regulation-dora|nist\.gov|bis\.org|sec\.gov|isda\.org/.test(u))return "Regulator";
+  if(/bloomberg|spglobal|nasdaq|msci|factset|deutsche-boerse|clearstream|cmegroup|theice|eurex|euronext|hkex/.test(u))return "Rival";
+  return "Press";
+}
+var refQ="",refT="all";
+function drawRefs(){
+  [["S",RS],["P",RP]].forEach(function(pair){
+    var d=pair[0];
+    $('refs-'+d).innerHTML=pair[1].map(function(r,i){
+      var parts=r.split('|'),t=parts[0],u=parts[1],ty=rtype(u);
+      var show=(refT==="all"||refT===ty)&&(!refQ||(t+' '+u).toLowerCase().indexOf(refQ)>=0);
+      var isUrl=/^[a-z0-9.-]+\.[a-z]{2,}\/\S*$/i.test(u)&&u.indexOf(' ')<0;
+      return '<div class="ref" id="'+d+'-'+(i+1)+'"'+(show?'':' hidden')+'><span class="id">'+d+'-'+(i+1)+'</span><div>'+esc(t)+'<span class="ty">'+ty+'</span><br>'+(isUrl?'<a href="https://'+esc(u)+'" target="_blank" rel="noopener">'+esc(u)+'</a>':'<span class="muted small">'+esc(u)+'</span>')+'</div></div>';
+    }).join('');
+  });
+}
+$('ref-q').oninput=function(){refQ=this.value.trim().toLowerCase();drawRefs();};
+Array.prototype.forEach.call($('ref-type').querySelectorAll('button'),function(b){b.onclick=function(){refT=b.dataset.t;Array.prototype.forEach.call($('ref-type').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b);});drawRefs();};});
+var REFMAP={};RS.forEach(function(r,i){REFMAP['S-'+(i+1)]=r.split('|')[0];});RP.forEach(function(r,i){REFMAP['P-'+(i+1)]=r.split('|')[0];});
+document.addEventListener('mouseover',function(e){var a=e.target.closest&&e.target.closest('a.cite');if(a){var k=a.getAttribute('href').slice(1);if(REFMAP[k])showTip(e,'<b>'+k+'</b> '+esc(REFMAP[k]));}});
+document.addEventListener('mouseout',function(e){if(e.target.closest&&e.target.closest('a.cite'))hideTip();});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.cite');if(a){var k=a.getAttribute('href').slice(1);var el=$(k);if(el&&el.hidden){refQ="";refT="all";$('ref-q').value="";Array.prototype.forEach.call($('ref-type').querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x.dataset.t==='all');});drawRefs();}}});
+
+/* ---------- nav highlight ---------- */
+var secs=["strategy","products","platform","roadmap","sources"];
+function onScroll(){var y=scrollY+120,cur=null;secs.forEach(function(s){var el=$(s);if(el&&el.offsetTop<=y)cur=s;});Array.prototype.forEach.call(document.querySelectorAll('.navlinks a'),function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur);});}
+addEventListener('scroll',onScroll,{passive:true});
+
+drawSeg();drawGrid();drawDetail();drawH2H();drawMx();drawBp();drawSegBp();drawRm();drawRefs();onScroll();
+})();
+</script>
